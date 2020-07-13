@@ -5,6 +5,7 @@
     <OutputPath>$(SolutionDir)Build/</OutputPath>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+    <RootNamespace>Altseed2.ToolAuxiliary</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
