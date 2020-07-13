@@ -149,7 +149,7 @@ namespace Test
                 ToolEnabled = true
             });
             ToolHelper.Name = "Tool4";
-            ToolHelper.Size = new Vector2I(250, 150);
+            ToolHelper.Size = new Vector2I(250, 350);
             ToolHelper.WindowFlags = ToolWindow.NoResize | ToolWindow.NoCollapse | ToolWindow.NoMove;
             var tabbar = new TabBar("TabBar");
             var tabItem1 = new TabItem("A");
@@ -168,6 +168,15 @@ namespace Test
             tabItem3.AddComponent(new Combo("C3", new object[] { 'a', 'b', 'c', 'd', 'e' }));
             tabbar.AddTabItem(tabItem3);
             ToolHelper.AddComponent(tabbar);
+            var node1 = new TreeNode("1");
+            var node1_1 = new TreeNode("1-1");
+            node1_1.AddComponent(new Text("1-1-1"));
+            node1_1.AddComponent(new Text("1-1-2"));
+            var node1_2 = new TreeNode("1-2");
+            node1_2.AddComponent(new Text("1-2"));
+            node1.AddComponent(node1_1);
+            node1.AddComponent(node1_2);
+            ToolHelper.AddComponent(node1);
             while (Engine.DoEvents())
             {
                 ToolHelper.Update();
