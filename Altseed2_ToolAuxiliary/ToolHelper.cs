@@ -9,6 +9,14 @@ namespace Altseed2.ToolAuxiliary
     public static class ToolHelper
     {
         /// <summary>
+        /// クリップボードのテクストを取得または設定する
+        /// </summary>
+        public static string ClipBoardText { get => Engine.Tool.GetClipboardText(); set => Engine.Tool.SetClipboardText(value ?? string.Empty); }
+        /// <summary>
+        /// カーソルの座標を取得または設定する
+        /// </summary>
+        public static Vector2F CursorPosition { get => Engine.Tool.GetCursorPos(); set => Engine.Tool.SetCursorPos(value); }
+        /// <summary>
         /// 格納されている<see cref="ToolComponent"/>を取得する
         /// </summary>
         public static ReadOnlyCollection<ToolComponent> Components => container.AsReadOnly();

@@ -185,5 +185,24 @@ namespace Test
             }
             Engine.Terminate();
         }
+        [Test]
+        public void Tool5()
+        {
+            Engine.Initialize("Tool5", 960, 720, new Configuration()
+            {
+                ToolEnabled = true
+            });
+            ToolHelper.Name = "Tool5";
+            ToolHelper.Size = new Vector2I(250, 350);
+            ToolHelper.WindowFlags = ToolWindow.NoResize | ToolWindow.NoCollapse | ToolWindow.NoMove;
+            ToolHelper.AddComponent(new ProgressBar("ProgressBar", 0f, 1f) { AddProgressValue = true });
+            while (Engine.DoEvents())
+            {
+                ToolHelper.Update();
+                Engine.Update();
+                if (Engine.Keyboard.GetKeyState(Keys.Escape) == ButtonState.Push) break;
+            }
+            Engine.Terminate();
+        }
     }
 }
