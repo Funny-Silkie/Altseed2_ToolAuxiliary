@@ -11,7 +11,7 @@ namespace Altseed2.ToolAuxiliary
     public class TabBar : ToolComponent, IComponentRegisterable<TabItem>
     {
         /// <summary>
-        /// 格納されている<see cref="TabBar"/>を取得する
+        /// 格納されている<see cref="TabItem"/>を取得する
         /// </summary>
         public ReadOnlyCollection<TabItem> Components => container.AsReadOnly();
         IEnumerable<TabItem> IComponentRegisterable<TabItem>.Components => Components;
