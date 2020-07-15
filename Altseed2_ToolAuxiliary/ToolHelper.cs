@@ -34,6 +34,18 @@ namespace Altseed2.ToolAuxiliary
         /// </summary>
         public static Vector2F Position { get; set; }
         /// <summary>
+        /// スクロールの最大座標を取得する
+        /// </summary>
+        public static Vector2F ScrollMax => new Vector2F(Engine.Tool.GetScrollMaxX(), Engine.Tool.GetScrollMaxY());
+        /// <summary>
+        /// X方向のスクロール地点を取得または設定する
+        /// </summary>
+        public static float ScrollX { get => Engine.Tool.GetScrollX(); set => Engine.Tool.SetScrollX(value); }
+        /// <summary>
+        /// Y方向のスクロール地点を取得または設定する
+        /// </summary>
+        public static float ScrollY { get => Engine.Tool.GetScrollY(); set => Engine.Tool.SetScrollY(value); }
+        /// <summary>
         /// ウィンドウの大きさを取得または設定する
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">設定しようとした値の成分が0未満</exception>
