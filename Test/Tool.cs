@@ -92,7 +92,7 @@ namespace Test
             ToolHelper.AddComponent(new SliderInt2("Int2", 0, 0));
             ToolHelper.AddComponent(new SliderInt3("Int3", 0, 0, 0));
             ToolHelper.AddComponent(new SliderInt4("Int4", 0, 0, 0, 0));
-            ToolHelper.AddComponent(new SliderFloat1("Float1", 0));
+            //ToolHelper.AddComponent(new SliderFloat1("Float1", 0));
             ToolHelper.AddComponent(new SliderFloat2("Float2", 0, 0));
             ToolHelper.AddComponent(new SliderFloat3("Float3", 0, 0, 0));
             ToolHelper.AddComponent(new SliderFloat4("Float4", 0, 0, 0, 0));
