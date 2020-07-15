@@ -196,6 +196,11 @@ namespace Test
             ToolHelper.Size = new Vector2I(250, 350);
             ToolHelper.WindowFlags = ToolWindow.NoResize | ToolWindow.NoCollapse | ToolWindow.NoMove;
             ToolHelper.AddComponent(new ProgressBar("ProgressBar", 0f, 1f) { AddProgressValue = true });
+            var group = new Group();
+            group.AddComponent(new Text("A"));
+            group.AddComponent(new Text("B"));
+            group.AddComponent(new Text("C"));
+            ToolHelper.AddComponent(group);
             while (Engine.DoEvents())
             {
                 ToolHelper.Update();
