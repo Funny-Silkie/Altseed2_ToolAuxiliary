@@ -17,4 +17,10 @@
     <ProjectReference Include="..\Altseed2_ToolAuxiliary\Altseed2_ToolAuxiliary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Resources\Texture.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
