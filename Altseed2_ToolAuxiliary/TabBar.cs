@@ -59,7 +59,7 @@ namespace Altseed2.ToolAuxiliary
         internal override void Update()
         {
             if (!Engine.Tool.BeginTabBar(Label, Flags)) return;
-            for (int i = 0; i < container.Count; i++) container[i].Update();
+            for (int i = 0; i < container.Count; i++) container[i].DoUpdate();
             Engine.Tool.EndTabBar();
         }
     }

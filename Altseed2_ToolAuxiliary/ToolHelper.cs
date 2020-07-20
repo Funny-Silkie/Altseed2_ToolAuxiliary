@@ -97,7 +97,7 @@ namespace Altseed2.ToolAuxiliary
             Engine.Tool.SetNextWindowPos(Position, ToolCond.None);
             if (!Engine.Tool.Begin(Name ?? string.Empty, GetFlags())) return;
             MenuBar?.Update();
-            for (int i = 0; i < container.Count; i++) container[i].Update();
+            for (int i = 0; i < container.Count; i++) container[i].DoUpdate();
             Engine.Tool.End();
         }
     }

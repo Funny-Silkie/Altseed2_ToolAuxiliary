@@ -63,7 +63,7 @@ namespace Altseed2.ToolAuxiliary
             if (!Engine.Tool.TreeNode(Label ?? string.Empty)) return;
             Clicked?.Invoke(this, EventArgs.Empty);
             OnClick();
-            for (int i = 0; i < container.Count; i++) container[i].Update();
+            for (int i = 0; i < container.Count; i++) container[i].DoUpdate();
             Engine.Tool.TreePop();
         }
     }

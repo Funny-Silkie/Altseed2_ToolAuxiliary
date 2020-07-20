@@ -41,7 +41,7 @@ namespace Altseed2.ToolAuxiliary
         internal void Update()
         {
             if (!Engine.Tool.BeginMenuBar()) return;
-            for (int i = 0; i < container.Count; i++) container[i].Update();
+            for (int i = 0; i < container.Count; i++) container[i].DoUpdate();
             Engine.Tool.EndMenuBar();
         }
     }

@@ -66,7 +66,7 @@ namespace Altseed2.ToolAuxiliary
             if (!Engine.Tool.BeginMenu(Label ?? string.Empty, Enabled)) return;
             Clicked?.Invoke(this, EventArgs.Empty);
             OnClicked();
-            for (int i = 0; i < container.Count; i++) container[i].Update();
+            for (int i = 0; i < container.Count; i++) container[i].DoUpdate();
             Engine.Tool.EndMenu();
         }
     }
