@@ -1,4 +1,4 @@
-﻿using Altseed2;
+using Altseed2;
 using Altseed2.ToolAuxiliary;
 using System.Diagnostics;
 using NUnit.Framework;
@@ -7,7 +7,7 @@ namespace Test
 {
     public class Tool
     {
-        [Test]
+        [Test, Apartment(System.Threading.ApartmentState.STA)]
         public void Tool1()
         {
             Engine.Initialize("Tool1", 960, 720, new Configuration()
@@ -62,7 +62,7 @@ namespace Test
             }
             Engine.Terminate();
         }
-        [Test]
+        [Test, Apartment(System.Threading.ApartmentState.STA)]
         public void Tool2()
         {
             Engine.Initialize("Tool2", 960, 720, new Configuration()
@@ -104,7 +104,7 @@ namespace Test
             }
             Engine.Terminate();
         }
-        [Test]
+        [Test, Apartment(System.Threading.ApartmentState.STA)]
         public void Tool3()
         {
             Engine.Initialize("Tool3", 960, 720, new Configuration()
@@ -141,7 +141,7 @@ namespace Test
             }
             Engine.Terminate();
         }
-        [Test]
+        [Test, Apartment(System.Threading.ApartmentState.STA)]
         public void Tool4()
         {
             Engine.Initialize("Tool4", 960, 720, new Configuration()
@@ -185,7 +185,7 @@ namespace Test
             }
             Engine.Terminate();
         }
-        [Test]
+        [Test, Apartment(System.Threading.ApartmentState.STA)]
         public void Tool5()
         {
             Engine.Initialize("Tool5", 960, 720, new Configuration()
