@@ -1,4 +1,4 @@
-using Altseed2;
+﻿using Altseed2;
 using Altseed2.ToolAuxiliary;
 using System.Diagnostics;
 using NUnit.Framework;
@@ -201,6 +201,64 @@ namespace Test
             group.AddComponent(new Text("B"));
             group.AddComponent(new Text("C"));
             ToolHelper.AddComponent(group);
+            while (Engine.DoEvents())
+            {
+                ToolHelper.Update();
+                Engine.Update();
+                if (Engine.Keyboard.GetKeyState(Keys.Escape) == ButtonState.Push) break;
+            }
+            Engine.Terminate();
+        }
+        [Test, Apartment(System.Threading.ApartmentState.STA)]
+        public void Tool6()
+        {
+            Engine.Initialize("Tool6", 960, 720, new Configuration()
+            {
+                ToolEnabled = true
+            });
+            ToolHelper.Name = "Tool6";
+            ToolHelper.Size = new Vector2I(250, 350);
+            ToolHelper.WindowFlags = ToolWindow.NoResize | ToolWindow.NoCollapse | ToolWindow.NoMove;
+            var button_OpenMono = new Button("OpenMono");
+            var dialog_Open = new OpenFileDialog()
+            {
+                Filter = "jpg,png"
+            };
+            button_OpenMono.Clicked += (x, y) =>
+            {
+                if (dialog_Open.ShowDialog()) Debug.WriteLine(dialog_Open.FileName);
+            };
+            ToolHelper.AddComponent(button_OpenMono);
+            var button_OpenMulti = new Button("OpenMulti");
+            var dialog_OpenMulti = new OpenFileDialog()
+            {
+                Filter = "jpg,png",
+                MultiSelect  = true
+            };
+            button_OpenMulti.Clicked += (x, y) =>
+            {
+                if (dialog_OpenMulti.ShowDialog())
+                    foreach (var filename in dialog_OpenMulti.FileNames)
+                    Debug.WriteLine(filename);
+            };
+            ToolHelper.AddComponent(button_OpenMulti);
+            var button_Save = new Button("Save");
+            var dialog_Save = new SaveFileDialog()
+            {
+                Filter = "jpg,png"
+            };
+            button_Save.Clicked += (x, y) =>
+            {
+                if (dialog_Save.ShowDialog()) Debug.WriteLine(dialog_Save.FileName);
+            };
+            ToolHelper.AddComponent(button_Save);
+            var button_Folder = new Button("Folder");
+            var dialog_Folder = new FolderDialog();
+            button_Folder.Clicked += (x, y) =>
+            {
+                if (dialog_Folder.ShowDialog()) Debug.WriteLine(dialog_Folder.SelectedPath);
+            };
+            ToolHelper.AddComponent(button_Folder);
             while (Engine.DoEvents())
             {
                 ToolHelper.Update();
