@@ -11,9 +11,17 @@ namespace Altseed2.ToolAuxiliary
     public abstract class FileDialog : DialogBase
     {
         /// <summary>
+        /// 自動的に<see cref="DefaultExtension"/>を追加するかどうかを取得または設定する
+        /// </summary>
+        public bool AddExtension { get; set; }
+        /// <summary>
         /// 選択したファイルが存在するかどうかを取得または設定する
         /// </summary>
         public bool CheckFileExists { get; set; }
+        /// <summary>
+        /// 基準となる拡張子を取得または設定する
+        /// </summary>
+        public string DefaultExtension { get; set; }
         /// <summary>
         /// 選択するファイル名を取得または設定する
         /// </summary>

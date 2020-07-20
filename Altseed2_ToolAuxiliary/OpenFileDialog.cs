@@ -34,6 +34,13 @@ namespace Altseed2.ToolAuxiliary
                     return false;
                 }
                 var array = path.Split(',');
+                if (AddExtension && !string.IsNullOrEmpty(DefaultExtension))
+                    for (int i = 0; i < array.Length; i++)
+                        if (array[i].IndexOfAny(Path.GetInvalidPathChars()) < 0 && !string.IsNullOrWhiteSpace(array[i]))
+                        {
+                            var ex = $".{DefaultExtension.TrimStart('.')}";
+                            if (Path.GetExtension(array[i]).Length == 0) array[i] += ex;
+                        }
                 if (CheckFileExists)
                     for (int i = 0; i < array.Length; i++)
                         if (!Engine.File.Exists(array[i]))
@@ -51,16 +58,26 @@ namespace Altseed2.ToolAuxiliary
             }
             else
             {
-                var str = Engine.Tool.OpenDialog(Filter ?? string.Empty, Directory.Exists(InitialDirectory) ? InitialDirectory : string.Empty);
-                if (CheckFileExists && !Engine.File.Exists(str))
+                var path = Engine.Tool.OpenDialog(Filter ?? string.Empty, Directory.Exists(InitialDirectory) ? InitialDirectory : string.Empty);
+                if (string.IsNullOrEmpty(path))
                 {
-                    log = $"File does not exists\nPath: {str}";
+                    log = null;
                     return false;
                 }
-                if (CheckPathExists && !CheckFilePath(str, out log)) return false;
+                if (AddExtension && !string.IsNullOrEmpty(DefaultExtension) && path.IndexOfAny(Path.GetInvalidPathChars()) < 0 && !string.IsNullOrWhiteSpace(path))
+                {
+                    var ex = $".{DefaultExtension.TrimStart('.')}";
+                    if (Path.GetExtension(path).Length == 0) path += ex;
+                }
+                if (CheckFileExists && !Engine.File.Exists(path))
+                {
+                    log = $"File does not exists\nPath: {path}";
+                    return false;
+                }
+                if (CheckPathExists && !CheckFilePath(path, out log)) return false;
                 log = null;
-                FileName = str;
-                FileNames = new[] { str };
+                FileName = path;
+                FileNames = new[] { path };
                 return true;
             }
         }

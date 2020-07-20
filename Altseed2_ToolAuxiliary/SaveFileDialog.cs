@@ -23,6 +23,11 @@ namespace Altseed2.ToolAuxiliary
                 log = null;
                 return false;
             }
+            if (AddExtension && !string.IsNullOrEmpty(DefaultExtension) && path.IndexOfAny(Path.GetInvalidPathChars()) < 0 && !string.IsNullOrWhiteSpace(path))
+            {
+                var ex = $".{DefaultExtension.TrimStart('.')}";
+                if (Path.GetExtension(path).Length == 0) path += ex;
+            }
             if (CheckFileExists && !Engine.File.Exists(path))
             {
                 log = $"File does not exists\nPath: {path}";
