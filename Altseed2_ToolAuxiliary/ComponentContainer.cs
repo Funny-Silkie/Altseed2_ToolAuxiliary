@@ -36,13 +36,18 @@ namespace Altseed2.ToolAuxiliary
             if (component.Index >= 0) return false;
             component.Index = components.Count;
             components.Add(component);
+            component.InvokeOnRegistered();
             return true;
         }
         void ICollection<TComponent>.Add(TComponent item) => Add(item);
         int IList.Add(object value) => value is TComponent c && Add(c) ? Count - 1 : -1;
         public void Clear()
         {
-            for (int i = 0; i < Count; i++) components[i].Index = -1;
+            for (int i = 0; i < Count; i++)
+            {
+                components[i].Index = -1;
+                components[i].InvokeOnUnRegistered();
+            }
             components.Clear();
         }
         public bool Contains(TComponent component)
@@ -65,6 +70,7 @@ namespace Altseed2.ToolAuxiliary
             if (index < 0 || Count < index) throw new ArgumentOutOfRangeException(nameof(index), $"引数が範囲外です\n許容される範囲：0～{Count}\n実際の値：{index}");
             components.Insert(index, component);
             component.Index = index;
+            component.InvokeOnRegistered();
             for (int i = index + 1; i < Count; i++) components[i].Index++;
             return true;
         }
@@ -85,6 +91,7 @@ namespace Altseed2.ToolAuxiliary
             components.RemoveAt(index);
             for (int i = index; i < components.Count; i++) components[i].Index--;
             component.Index = -1;
+            component.InvokeOnUnRegistered();
         }
     }
 }

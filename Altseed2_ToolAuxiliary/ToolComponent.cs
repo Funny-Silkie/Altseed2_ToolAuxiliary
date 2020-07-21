@@ -20,9 +20,33 @@ namespace Altseed2.ToolAuxiliary
         /// <see cref="ToolComponent"/>の新しいインスタンスを生成する
         /// </summary>
         protected ToolComponent() { }
+        /// <summary>
+        /// 自身が追加された時に実行
+        /// </summary>
+        public event EventHandler Registered;
+        /// <summary>
+        /// 自身が削除された時に実行
+        /// </summary>
+        public event EventHandler UnRegistered;
         internal void DoUpdate(bool force = false)
         {
             if (force || IsUpdated) Update();
+        }
+        internal void InvokeOnRegistered() => OnRegistered();
+        internal void InvokeOnUnRegistered() => OnUnRegistered();
+        /// <summary>
+        /// 自身が追加された時に実行
+        /// </summary>
+        protected virtual void OnRegistered()
+        {
+            Registered?.Invoke(this, EventArgs.Empty);
+        }
+        /// <summary>
+        /// 自身が削除された時に実行
+        /// </summary>
+        protected virtual void OnUnRegistered()
+        {
+            UnRegistered?.Invoke(this, EventArgs.Empty);
         }
         internal abstract void Update();
     }
