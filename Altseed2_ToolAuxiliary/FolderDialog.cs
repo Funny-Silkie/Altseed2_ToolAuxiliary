@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Threading;
 
 namespace Altseed2.ToolAuxiliary
 {
@@ -19,6 +20,7 @@ namespace Altseed2.ToolAuxiliary
         public FolderDialog() { }
         public override bool ShowDialog(out string log)
         {
+            if (Thread.CurrentThread.GetApartmentState() != ApartmentState.STA) throw new InvalidOperationException("Main関数にSTAThreadAttributeが設定されていることを確認してください");
             var path = Engine.Tool.PickFolder(Directory.Exists(InitialDirectory) ? InitialDirectory : string.Empty);
             if (string.IsNullOrEmpty(path))
             {
