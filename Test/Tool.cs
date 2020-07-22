@@ -76,6 +76,7 @@ namespace Test
             var imageButton = new ImageButton()
             {
                 Color = new Color(100, 255, 100),
+                FrameSize = 3,
                 Texture = Texture2D.LoadStrict("Resources/Texture.png")
             };
             imageButton.Clicked += (x, y) => Debug.WriteLine("ImageButton_Clicked");
@@ -83,6 +84,7 @@ namespace Test
             ToolHelper.AddComponent(new Image()
             {
                 Color = new Color(100, 255, 255),
+                FrameColor = new Color(255, 100, 100),
                 Texture = Texture2D.LoadStrict("Resources/Texture.png")
             });
             ToolHelper.AddComponent(new ListBox("List", new object[] { DrawMode.Absolute, DrawMode.Fill, DrawMode.KeepAspect }));

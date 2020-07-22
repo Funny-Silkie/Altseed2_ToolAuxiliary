@@ -15,6 +15,10 @@ namespace Altseed2.ToolAuxiliary
         /// </summary>
         public Color Color { get; set; } = new Color(255, 255, 255);
         /// <summary>
+        /// 枠線の色を取得または設定する
+        /// </summary>
+        public Color FrameColor { get; set; } = new Color(255, 255, 255);
+        /// <summary>
         /// 拡大率を取得または設定する
         /// </summary>
         public Vector2F Scale { get; set; } = new Vector2F(1f, 1f);
@@ -75,7 +79,7 @@ namespace Altseed2.ToolAuxiliary
         public Image() { }
         internal override void Update()
         {
-            Engine.Tool.Image(Texture, Size, uv0, uv1, Color, Color);
+            Engine.Tool.Image(Texture, Size, uv0, uv1, Color, FrameColor);
         }
     }
 }
