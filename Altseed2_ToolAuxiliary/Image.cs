@@ -23,12 +23,11 @@ namespace Altseed2.ToolAuxiliary
         /// </summary>
         public Vector2F Size
         {
-            get => (_texture?.Size ?? default) * Scale;
+            get => _src.Size * Scale;
             set
             {
-                var size = _texture?.Size ?? default;
-                if (size.X == 0 || size.Y == 0) return;
-                Scale = value / size;
+                var size = _src.Size;
+                Scale = size.X == 0 || size.Y == 0 ? default : value / size;
             }
         }
         /// <summary>
@@ -41,11 +40,21 @@ namespace Altseed2.ToolAuxiliary
             {
                 if (_src == value) return;
                 _src = value;
-                uv0 = value.Position;
-                uv1 = value.Position + value.Size;
+                var size = _texture?.Size ?? new Vector2F(1f, 1f);
+                if (size.X == 0 || size.Y == 0)
+                {
+                    uv0 = default;
+                    uv1 = new Vector2F(1f, 1f);
+                }
+                else
+                {
+                    uv0 = value.Position / size;
+                    uv1 = uv0 + value.Size / size;
+                }
+                Size = value.Size;
             }
         }
-        private RectF _src;
+        private RectF _src = new RectF(default, new Vector2F(1f, 1f));
         /// <summary>
         /// 描画するテクスチャを取得または設定する
         /// </summary>
