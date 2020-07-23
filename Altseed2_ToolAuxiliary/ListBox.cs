@@ -5,36 +5,10 @@ namespace Altseed2.ToolAuxiliary
     /// <summary>
     /// リストボックスのクラス
     /// </summary>
+    /// <typeparam name="T">格納される要素の型</typeparam>
     [Serializable]
-    public sealed class ListBox : ToolComponent
+    public class ListBox<T> : ListComponent<T>
     {
-        private readonly static object[] defaultItem = new[] { "Value" };
-        private string text;
-        /// <summary>
-        /// 表示するアイテムを設定する
-        /// </summary>
-        /// <exception cref="ArgumentNullException">設定しようとした値がnull</exception>
-        public object[] Items
-        {
-            get => _items;
-            set
-            {
-                if (value == null) throw new ArgumentNullException(nameof(value), "引数がnullです");
-                if (_items == value) return;
-                var array = new object[value.Length];
-                text = string.Empty;
-                var builder = new System.Text.StringBuilder();
-                for (int i = 0; i < value.Length; i++)
-                {
-                    if (i > 0) builder.Append('\t');
-                    builder.Append(value[i].ToString() ?? string.Empty);
-                    array[i] = value[i];
-                }
-                _items = array;
-                text = builder.ToString() ?? string.Empty;
-            }
-        }
-        private object[] _items;
         /// <summary>
         /// 表示される文字列を取得または設定する
         /// </summary>
@@ -55,42 +29,25 @@ namespace Altseed2.ToolAuxiliary
         }
         private int _maxPopUpItems = 3;
         /// <summary>
-        /// 選択されているインデックスを取得または設定する
+        /// 既定の文字列と要素を格納する<see cref="ListBox{T}"/>の新しいインスタンスを生成する
         /// </summary>
-        public int SelectedIndex { get; set; }
+        public ListBox() : this(string.Empty, Array.Empty<T>()) { }
         /// <summary>
-        /// 選択されているアイテムを取得または設定する
-        /// </summary>
-        public object SelectedItem
-        {
-            get => SelectedIndex >= 0 && SelectedIndex < _items.Length ? _items[SelectedIndex] : null;
-            set => SelectedIndex = Array.IndexOf(_items, value);
-        }
-        /// <summary>
-        /// 選択されている要素が変化したときに実行
-        /// </summary>
-        public event EventHandler SelectedItemChanged;
-        /// <summary>
-        /// 既定の文字列と要素を格納する<see cref="ListBox"/>の新しいインスタンスを生成する
-        /// </summary>
-        public ListBox() : this(string.Empty, defaultItem) { }
-        /// <summary>
-        /// 指定した文字列と要素を格納する<see cref="ListBox"/>の新しいインスタンスを生成する
+        /// 指定した文字列と要素を格納する<see cref="ListBox{T}"/>の新しいインスタンスを生成する
         /// </summary>
         /// <param name="label">表示される文字列</param>
         /// <param name="items">格納する要素</param>
-        public ListBox(string label, object[] items)
+        public ListBox(string label, T[] items)
         {
             Label = label;
-            Items = items;
+            Items.SetFromArray(items);
         }
         internal override void Update()
         {
             var current = SelectedIndex;
-            if (!Engine.Tool.ListBox(Label ?? string.Empty, ref current, text, MaxPopUpItems)) return;
+            if (!Engine.Tool.ListBox(Label ?? string.Empty, ref current, Items.Text, MaxPopUpItems)) return;
             if (current == SelectedIndex) return;
             SelectedIndex = current;
-            SelectedItemChanged?.Invoke(this, EventArgs.Empty);
         }
     }
 }

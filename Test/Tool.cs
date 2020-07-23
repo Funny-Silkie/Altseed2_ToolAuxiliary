@@ -72,7 +72,7 @@ namespace Test
             ToolHelper.Name = "Tool2";
             ToolHelper.Size = new Vector2I(250, 500);
             ToolHelper.WindowFlags = ToolWindow.NoResize | ToolWindow.NoCollapse | ToolWindow.NoMove;
-            ToolHelper.AddComponent(new Combo("Combo", new object[] { AlphaBlendMode.Add, AlphaBlendMode.Multiply, AlphaBlendMode.Normal, AlphaBlendMode.Opacity, AlphaBlendMode.Subtract }));
+            ToolHelper.AddComponent(new Combo<AlphaBlendMode>("Combo", new [] { AlphaBlendMode.Add, AlphaBlendMode.Multiply, AlphaBlendMode.Normal, AlphaBlendMode.Opacity, AlphaBlendMode.Subtract }));
             var imageButton = new ImageButton()
             {
                 Color = new Color(100, 255, 100),
@@ -87,7 +87,7 @@ namespace Test
                 FrameColor = new Color(255, 100, 100),
                 Texture = Texture2D.LoadStrict("Resources/Texture.png")
             });
-            ToolHelper.AddComponent(new ListBox("List", new object[] { DrawMode.Absolute, DrawMode.Fill, DrawMode.KeepAspect }));
+            ToolHelper.AddComponent(new ListBox<DrawMode>("List", new [] { DrawMode.Absolute, DrawMode.Fill, DrawMode.KeepAspect }));
             ToolHelper.AddComponent(new BulletTexts(new[] { "A", "B", "C" }));
             ToolHelper.AddComponent(new CheckBox("CheckBox", true));
             ToolHelper.AddComponent(new SliderInt1("Int1", 0));
@@ -165,9 +165,9 @@ namespace Test
             tabItem2.AddComponent(new InputInt1("B3", 0));
             tabbar.AddTabItem(tabItem2);
             var tabItem3 = new TabItem("C");
-            tabItem3.AddComponent(new Combo("C1", new object[] { 1, 2, 3, 4, 5 }));
-            tabItem3.AddComponent(new Combo("C2", new object[] { 0.1, 0.2, 0.3, 0.4, 0.5 }));
-            tabItem3.AddComponent(new Combo("C3", new object[] { 'a', 'b', 'c', 'd', 'e' }));
+            tabItem3.AddComponent(new Combo<int>("C1", new [] { 1, 2, 3, 4, 5 }));
+            tabItem3.AddComponent(new Combo<double>("C2", new [] { 0.1, 0.2, 0.3, 0.4, 0.5 }));
+            tabItem3.AddComponent(new Combo<char>("C3", new [] { 'a', 'b', 'c', 'd', 'e' }));
             tabbar.AddTabItem(tabItem3);
             ToolHelper.AddComponent(tabbar);
             var node1 = new TreeNode("1");
