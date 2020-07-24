@@ -6,7 +6,7 @@ namespace Altseed2.ToolAuxiliary
     /// <see cref="Altseed2.Tool"/>に用いられるクラスの基本クラス
     /// </summary>
     [Serializable]
-    public abstract class ToolComponent
+    public abstract class ToolComponent : IToolComponent
     {
         /// <summary>
         /// インデックスを取得する
@@ -28,6 +28,7 @@ namespace Altseed2.ToolAuxiliary
         /// 自身が削除された時に実行
         /// </summary>
         public event EventHandler UnRegistered;
+        ToolComponent IToolComponent.AsToolComponent() => this;
         internal void DoUpdate(bool force = false)
         {
             if (force || IsUpdated) Update();
@@ -51,5 +52,12 @@ namespace Altseed2.ToolAuxiliary
             UnRegistered?.Invoke(this, e);
         }
         internal abstract void Update();
+    }
+    /// <summary>
+    /// ツールコンポーネントの基底インターフェイス
+    /// </summary>
+    public interface IToolComponent
+    {
+        internal ToolComponent AsToolComponent();
     }
 }
