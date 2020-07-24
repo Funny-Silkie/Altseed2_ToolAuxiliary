@@ -36,9 +36,8 @@ namespace Altseed2.ToolAuxiliary
         }
         internal override void Update()
         {
-            throw new NotImplementedException("未実装です");
             var value = Value;
-            // if (!Engine.Tool.SliderFloat(Label ?? string.Empty, ref value, Speed, Min, Max)) return;
+            if (!Engine.Tool.SliderFloat(Label ?? string.Empty, ref value, Speed, Min, Max)) return;
             if (Value == value) return;
             ValueChanged?.Invoke(this, new ToolValueEventArgs<float>(Value, value));
             Value = value;
