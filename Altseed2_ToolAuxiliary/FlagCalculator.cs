@@ -28,6 +28,20 @@
             if (selectable.KeepOpenPopups) result |= ToolSelectable.DontClosePopups;
             return result;
         }
+        internal static ToolTabBar CaclToolTabBar(this IToolTabBar tabBar)
+        {
+            if (tabBar == null) return default;
+            var result = ToolTabBar.None;
+            switch (tabBar.FittingType)
+            {
+                case IToolTabBar.TabBarFittingType.Default: result |= ToolTabBar.FittingPolicyScroll | ToolTabBar.NoTabListScrollingButtons; break;
+                case IToolTabBar.TabBarFittingType.ReSize: result |= ToolTabBar.FittingPolicyResizeDown; break;
+                case IToolTabBar.TabBarFittingType.ScrollBar: result |= ToolTabBar.FittingPolicyScroll; break;
+            }
+            if (tabBar.IsReorderable) result |= ToolTabBar.Reorderable;
+            if (tabBar.ShowListUpButton) result |= ToolTabBar.TabListPopupButton;
+            return result;
+        }
         internal static ToolTreeNode CalcToolTreeNode(this IToolTreeNode treeNode)
         {
             if (treeNode == null) return default;

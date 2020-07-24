@@ -8,7 +8,7 @@ namespace Altseed2.ToolAuxiliary
     /// タブバーのツールコンポーネントのクラス
     /// </summary>
     [Serializable]
-    public class TabBar : ToolComponent, IComponentRegisterable<TabItem>
+    public class TabBar : ToolComponent, IComponentRegisterable<TabItem>, IToolTabBar
     {
         /// <summary>
         /// 格納されている<see cref="TabItem"/>を取得する
@@ -16,10 +16,6 @@ namespace Altseed2.ToolAuxiliary
         public ReadOnlyCollection<TabItem> Components => container.AsReadOnly();
         IEnumerable<TabItem> IComponentRegisterable<TabItem>.Components => Components;
         private readonly ComponentContainer<TabItem> container = new ComponentContainer<TabItem>();
-        /// <summary>
-        /// 諸設定を取得または設定する
-        /// </summary>
-        public ToolTabBar Flags { get; set; }
         /// <summary>
         /// 表示される文字列を取得または設定する
         /// </summary>
@@ -58,9 +54,68 @@ namespace Altseed2.ToolAuxiliary
         bool IComponentRegisterable<TabItem>.RemoveComponent(TabItem component) => RemoveTabItem(component);
         internal override void Update()
         {
-            if (!Engine.Tool.BeginTabBar(Label, Flags)) return;
+            if (!Engine.Tool.BeginTabBar(Label ?? string.Empty, Flags)) return;
             for (int i = 0; i < container.Count; i++) container[i].DoUpdate();
             Engine.Tool.EndTabBar();
         }
+        #region IToolTabBar
+        private bool flagChanged;
+        /// <summary>
+        /// 入りきらないタブの表示方法を取得または設定する
+        /// </summary>
+        public IToolTabBar.TabBarFittingType FittingType
+        {
+            get => _fittingType;
+            set
+            {
+                if (_fittingType == value) return;
+                _fittingType = value;
+                flagChanged = true;
+            }
+        }
+        private IToolTabBar.TabBarFittingType _fittingType;
+        internal ToolTabBar Flags
+        {
+            get
+            {
+                if (flagChanged)
+                {
+                    _flags = FlagCalculator.CaclToolTabBar(this);
+                    flagChanged = true;
+                }
+                return _flags;
+            }
+        }
+        private ToolTabBar _flags;
+        ToolTabBar IToolTabBar.Flags => Flags;
+        /// <summary>
+        /// タブを並び替えられるかどうかを取得または設定する
+        /// </summary>
+        public bool IsReorderable
+        {
+            get => _isReordable;
+            set
+            {
+                if (_isReordable == value) return;
+                _isReordable = value;
+                flagChanged = true;
+            }
+        }
+        private bool _isReordable;
+        /// <summary>
+        /// 左側にタブをリストアップするボタンを表示するかどうかを取得または設定する
+        /// </summary>
+        public bool ShowListUpButton
+        {
+            get => _showListUpButton;
+            set
+            {
+                if (_showListUpButton == value) return;
+                _showListUpButton = value;
+                flagChanged = true;
+            }
+        }
+        private bool _showListUpButton;
+        #endregion
     }
 }
