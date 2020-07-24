@@ -6,7 +6,7 @@ namespace Altseed2.ToolAuxiliary
     /// ツールコンポーネントのテキストのクラス
     /// </summary>
     [Serializable]
-    public sealed class Text : ToolComponent
+    public class Text : ToolComponent
     {
         /// <summary>
         /// 色を取得または設定する

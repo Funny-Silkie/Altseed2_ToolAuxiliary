@@ -8,7 +8,7 @@ namespace Altseed2.ToolAuxiliary
     /// メニューバーのクラス
     /// </summary>
     [Serializable]
-    public sealed class MenuBar : IComponentRegisterable<ToolComponent>
+    public class MenuBar : IComponentRegisterable<ToolComponent>
     {
         /// <summary>
         /// 格納されている<see cref="ToolComponent"/>を取得する

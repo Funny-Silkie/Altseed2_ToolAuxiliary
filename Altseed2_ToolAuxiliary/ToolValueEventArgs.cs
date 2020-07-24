@@ -6,7 +6,7 @@ namespace Altseed2.ToolAuxiliary
     /// 値を扱うコンポーネントにて，値が変化したときに用いられる<see cref="EventArgs"/>のクラス
     /// </summary>
     [Serializable]
-    public sealed class ToolValueEventArgs<T> : EventArgs
+    public class ToolValueEventArgs<T> : EventArgs
     {
         /// <summary>
         /// 変更後の値

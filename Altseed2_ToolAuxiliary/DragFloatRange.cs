@@ -6,7 +6,7 @@ namespace Altseed2.ToolAuxiliary
     /// <see cref="float"/>型の範囲を格納するツールコンポーネントのクラス
     /// </summary>
     [Serializable]
-    public sealed class DragFloatRange : SliderFloatBase
+    public class DragFloatRange : SliderFloatBase
     {
         /// <summary>
         /// スライドの速さを取得または設定する

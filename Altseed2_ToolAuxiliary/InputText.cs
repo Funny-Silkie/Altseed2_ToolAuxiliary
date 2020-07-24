@@ -6,7 +6,7 @@ namespace Altseed2.ToolAuxiliary
     /// 文字を格納するツールコンポーネントのクラス
     /// </summary>
     [Serializable]
-    public sealed class InputText : ToolComponent
+    public class InputText : ToolComponent
     {
         /// <summary>
         /// 描画時の設定を取得または設定する

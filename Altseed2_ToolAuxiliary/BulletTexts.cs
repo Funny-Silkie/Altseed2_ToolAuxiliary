@@ -6,7 +6,7 @@ namespace Altseed2.ToolAuxiliary
     /// 列挙されたテキストのツールコンポーネントのクラス
     /// </summary>
     [Serializable]
-    public sealed class BulletTexts : ToolComponent
+    public class BulletTexts : ToolComponent
     {
         private readonly static string[] defaultArray = new[] { "Bullet1", "Bullet2" };
         /// <summary>
@@ -35,8 +35,7 @@ namespace Altseed2.ToolAuxiliary
         /// <exception cref="ArgumentNullException"><paramref name="texts"/>がnull</exception>
         public BulletTexts(string[] texts)
         {
-            if (texts == null) throw new ArgumentNullException(nameof(texts), "引数がnullです");
-            _texts = texts;
+            _texts = texts ?? throw new ArgumentNullException(nameof(texts), "引数がnullです");
         }
         internal override void Update()
         {

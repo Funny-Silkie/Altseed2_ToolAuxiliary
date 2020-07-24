@@ -6,7 +6,7 @@ namespace Altseed2.ToolAuxiliary
     /// <see cref="int"/>型の数字を格納するツールコンポーネントのクラス
     /// </summary>
     [Serializable]
-    public sealed class VSliderInt : SliderIntBase
+    public class VSliderInt : SliderIntBase
     {
         /// <summary>
         /// サイズを取得または設定する

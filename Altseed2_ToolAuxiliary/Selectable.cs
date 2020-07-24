@@ -6,7 +6,7 @@ namespace Altseed2.ToolAuxiliary
     /// 選択可能ラベルのクラス
     /// </summary>
     [Serializable]
-    public sealed class Selectable : ToolComponent
+    public class Selectable : ToolComponent
     {
         /// <summary>
         /// チェックされているかどうかを取得または設定する

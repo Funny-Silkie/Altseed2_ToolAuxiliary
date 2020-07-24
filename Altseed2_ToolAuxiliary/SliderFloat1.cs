@@ -6,7 +6,7 @@ namespace Altseed2.ToolAuxiliary
     /// <see cref="float"/>型の数字を1つ格納するツールコンポーネントのクラス
     /// </summary>
     [Serializable]
-    public sealed class SliderFloat1 : SliderFloatBase
+    public class SliderFloat1 : SliderFloatBase
     {
         /// <summary>
         /// スライドの速さを取得または設定する

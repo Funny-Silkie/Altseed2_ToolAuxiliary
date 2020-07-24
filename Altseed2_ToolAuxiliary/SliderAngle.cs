@@ -6,7 +6,7 @@ namespace Altseed2.ToolAuxiliary
     /// 角度を格納するツールコンポーネントのクラス
     /// </summary>
     [Serializable]
-    public sealed class SliderAngle : ToolComponent
+    public class SliderAngle : ToolComponent
     {
         /// <summary>
         /// 表示される文字列を取得または設定する

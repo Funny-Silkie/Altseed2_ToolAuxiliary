@@ -6,7 +6,7 @@ namespace Altseed2.ToolAuxiliary
     /// <see cref="int"/>型の数字を4つ格納するツールコンポーネントのクラス
     /// </summary>
     [Serializable]
-    public sealed class SliderInt4 : SliderIntBase
+    public class SliderInt4 : SliderIntBase
     {
         /// <summary>
         /// スライドの速さを取得または設定する

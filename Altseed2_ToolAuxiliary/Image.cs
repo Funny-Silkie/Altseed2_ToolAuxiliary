@@ -6,7 +6,7 @@ namespace Altseed2.ToolAuxiliary
     /// テクスチャのクラス
     /// </summary>
     [Serializable]
-    public sealed class Image : ToolComponent
+    public class Image : ToolComponent
     {
         private Vector2F uv0;
         private Vector2F uv1;

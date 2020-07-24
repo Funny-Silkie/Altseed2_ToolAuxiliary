@@ -6,7 +6,7 @@ namespace Altseed2.ToolAuxiliary
     /// <see cref="int"/>型の範囲を格納するツールコンポーネントのクラス
     /// </summary>
     [Serializable]
-    public sealed class DragIntRange : SliderIntBase
+    public class DragIntRange : SliderIntBase
     {
         /// <summary>
         /// スライドの速さを取得または設定する

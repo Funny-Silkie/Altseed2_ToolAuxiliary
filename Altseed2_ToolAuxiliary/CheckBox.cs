@@ -6,7 +6,7 @@ namespace Altseed2.ToolAuxiliary
     /// チェックボックスのクラス
     /// </summary>
     [Serializable]
-    public sealed class CheckBox : ToolComponent
+    public class CheckBox : ToolComponent
     {
         /// <summary>
         /// チェックされているかどうかを取得または設定する

@@ -6,7 +6,7 @@ namespace Altseed2.ToolAuxiliary
     /// <see cref="int"/>型の数字を1つ格納するツールコンポーネントのクラス
     /// </summary>
     [Serializable]
-    public sealed class InputInt1 : ToolComponent
+    public class InputInt1 : ToolComponent
     {
         /// <summary>
         /// 最大値を取得または設定する

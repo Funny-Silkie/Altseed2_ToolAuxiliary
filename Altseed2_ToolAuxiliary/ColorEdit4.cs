@@ -6,7 +6,7 @@ namespace Altseed2.ToolAuxiliary
     /// RGBAを設定するツールコンポーネントのクラス
     /// </summary>
     [Serializable]
-    public sealed class ColorEdit4 : ToolComponent
+    public class ColorEdit4 : ToolComponent
     {
         /// <summary>
         /// 色を取得または設定する
