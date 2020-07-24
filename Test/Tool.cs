@@ -203,6 +203,11 @@ namespace Test
             group.AddComponent(new Text("B"));
             group.AddComponent(new Text("C"));
             ToolHelper.AddComponent(group);
+            var collapsing = new CollapsingHeader("Collapsing");
+            collapsing.AddComponent(new Button("A"));
+            collapsing.AddComponent(new Button("B"));
+            collapsing.AddComponent(new Button("C"));
+            ToolHelper.AddComponent(collapsing);
             while (Engine.DoEvents())
             {
                 ToolHelper.Update();
