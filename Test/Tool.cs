@@ -208,6 +208,12 @@ namespace Test
             collapsing.AddComponent(new Button("B"));
             collapsing.AddComponent(new Button("C"));
             ToolHelper.AddComponent(collapsing);
+            var tooltip = new Tooltip();
+            tooltip.AddComponent(new ArrowButton("1", ToolDir.Down));
+            tooltip.AddComponent(new ArrowButton("2", ToolDir.Left));
+            tooltip.AddComponent(new ArrowButton("3", ToolDir.Right));
+            tooltip.AddComponent(new ArrowButton("4", ToolDir.Up));
+            ToolHelper.AddComponent(tooltip);
             while (Engine.DoEvents())
             {
                 ToolHelper.Update();
