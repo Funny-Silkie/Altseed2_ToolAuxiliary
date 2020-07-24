@@ -42,7 +42,7 @@ namespace Altseed2.ToolAuxiliary
         internal override void Update()
         {
             var result = IsVisible ? Engine.Tool.Button(Label ?? string.Empty, Size) : Engine.Tool.InvisibleButton(Label ?? string.Empty, Size.X == 0 || Size.Y == 0 ? new Vector2I(1, 1) :Size);
-            if (result) OnClicked();
+            if (result) OnClicked(EventArgs.Empty);
         }
     }
 }

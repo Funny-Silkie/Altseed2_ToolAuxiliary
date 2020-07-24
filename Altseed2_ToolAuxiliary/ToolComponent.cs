@@ -32,21 +32,23 @@ namespace Altseed2.ToolAuxiliary
         {
             if (force || IsUpdated) Update();
         }
-        internal void InvokeOnRegistered() => OnRegistered();
-        internal void InvokeOnUnRegistered() => OnUnRegistered();
+        internal void InvokeOnRegistered() => OnRegistered(EventArgs.Empty);
+        internal void InvokeOnUnRegistered() => OnUnRegistered(EventArgs.Empty);
         /// <summary>
         /// 自身が追加された時に実行
         /// </summary>
-        protected virtual void OnRegistered()
+        /// <param name="e">与えられる<see cref="EventArgs"/>のインスタンス</param>
+        protected virtual void OnRegistered(EventArgs e)
         {
-            Registered?.Invoke(this, EventArgs.Empty);
+            Registered?.Invoke(this, e);
         }
         /// <summary>
         /// 自身が削除された時に実行
         /// </summary>
-        protected virtual void OnUnRegistered()
+        /// <param name="e">与えられる<see cref="EventArgs"/>のインスタンス</param>
+        protected virtual void OnUnRegistered(EventArgs e)
         {
-            UnRegistered?.Invoke(this, EventArgs.Empty);
+            UnRegistered?.Invoke(this, e);
         }
         internal abstract void Update();
     }

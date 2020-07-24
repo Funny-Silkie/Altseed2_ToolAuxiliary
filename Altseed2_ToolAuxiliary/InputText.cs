@@ -53,13 +53,22 @@ namespace Altseed2.ToolAuxiliary
         /// <see cref="Text"/>が変更された時に実行
         /// </summary>
         public event EventHandler<ToolValueEventArgs<string>> TextChanged;
+        /// <summary>
+        /// <see cref="Text"/>が変更された時に実行
+        /// </summary>
+        /// <param name="e"><see cref="Text"/>の変更前後が与えられた<see cref="ToolValueEventArgs{T}"/>のインスタンス</param>
+        protected virtual void OnTextChanged(ToolValueEventArgs<string> e)
+        {
+            TextChanged?.Invoke(this, e);
+        }
         internal override void Update()
         {
             var text = Text ?? string.Empty;
             text = Engine.Tool.InputText(Label ?? string.Empty, text, _maxLength, Flags);
             if (text == null || Text == text) return;
-            TextChanged?.Invoke(this, new ToolValueEventArgs<string>(Text, text));
+            var old = Text;
             Text = text;
+            OnTextChanged(new ToolValueEventArgs<string>(old, text));
         }
     }
 }

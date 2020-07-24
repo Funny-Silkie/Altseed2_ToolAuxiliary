@@ -9,19 +9,20 @@ namespace Altseed2.ToolAuxiliary
     public abstract class ButtonBase : ToolComponent
     {
         /// <summary>
-        /// ボタンが押された時に実行
-        /// </summary>
-        public event EventHandler Clicked;
-        /// <summary>
         /// <see cref="ButtonBase"/>の新しいインスタンスを生成する
         /// </summary>
         protected ButtonBase() { }
         /// <summary>
         /// ボタンが押された時に実行
         /// </summary>
-        protected virtual void OnClicked()
+        public event EventHandler Clicked;
+        /// <summary>
+        /// ボタンが押された時に実行
+        /// </summary>
+        /// <param name="e">与えられる<see cref="EventArgs"/>のインスタンス</param>
+        protected virtual void OnClicked(EventArgs e)
         {
-            Clicked?.Invoke(this, EventArgs.Empty);
+            Clicked?.Invoke(this, e);
         }
     }
 }

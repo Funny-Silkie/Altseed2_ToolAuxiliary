@@ -34,7 +34,7 @@ namespace Altseed2.ToolAuxiliary
         {
             if (Direction == ToolDir.None) return;
             var result = Engine.Tool.ArrowButton(Label ?? string.Empty, Direction);
-            if (result) OnClicked();
+            if (result) OnClicked(EventArgs.Empty);
         }
     }
 }

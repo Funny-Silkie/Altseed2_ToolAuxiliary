@@ -17,10 +17,6 @@ namespace Altseed2.ToolAuxiliary
         /// </summary>
         public int Value { get; set; }
         /// <summary>
-        /// <see cref="Value"/>が変更された時に実行
-        /// </summary>
-        public event EventHandler<ToolValueEventArgs<int>> ValueChanged;
-        /// <summary>
         /// 既定の値を用いて<see cref="SliderInt1"/>の新しいインスタンスを生成する
         /// </summary>
         public SliderInt1() : this(string.Empty, default) { }
@@ -34,13 +30,26 @@ namespace Altseed2.ToolAuxiliary
             Label = label;
             Value = value;
         }
+        /// <summary>
+        /// <see cref="Value"/>が変更された時に実行
+        /// </summary>
+        public event EventHandler<ToolValueEventArgs<int>> ValueChanged;
+        /// <summary>
+        /// <see cref="Value"/>が変更された時に実行
+        /// </summary>
+        /// <param name="e"><see cref="Value"/>の変更前後を与えられた<see cref="ToolValueEventArgs{T}"/>のインスタンス</param>
+        protected virtual void OnValueChanged(ToolValueEventArgs<int> e)
+        {
+            ValueChanged?.Invoke(this, e);
+        }
         internal override void Update()
         {
             var value = Value;
             if (!Engine.Tool.SliderInt(Label ?? string.Empty, ref value, Speed, Min, Max)) return;
             if (Value == value) return;
-            ValueChanged?.Invoke(this, new ToolValueEventArgs<int>(Value, value));
+            var old = Value;
             Value = value;
+            OnValueChanged(new ToolValueEventArgs<int>(old, value));
         }
     }
 }

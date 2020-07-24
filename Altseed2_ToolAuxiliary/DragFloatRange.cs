@@ -9,10 +9,6 @@ namespace Altseed2.ToolAuxiliary
     public class DragFloatRange : SliderFloatBase
     {
         /// <summary>
-        /// スライドの速さを取得または設定する
-        /// </summary>
-        public float Speed { get; set; }
-        /// <summary>
         /// 大きい方の値を取得または設定する
         /// </summary>
         public float CurrentMax
@@ -39,13 +35,9 @@ namespace Altseed2.ToolAuxiliary
         }
         private float _currentMin = RuledMinimum;
         /// <summary>
-        /// <see cref="CurrentMax"/>が変更された時に実行
+        /// スライドの速さを取得または設定する
         /// </summary>
-        public event EventHandler<ToolValueEventArgs<float>> CurrentMaxChanged;
-        /// <summary>
-        /// <see cref="CurrentMin"/>が変更された時に実行
-        /// </summary>
-        public event EventHandler<ToolValueEventArgs<float>> CurrentMinChanged;
+        public float Speed { get; set; }
         /// <summary>
         /// 既定の値を用いて<see cref="DragFloatRange"/>の新しいインスタンスを生成する
         /// </summary>
@@ -62,6 +54,30 @@ namespace Altseed2.ToolAuxiliary
             CurrentMin = currentMin;
             CurrentMax = currentMax;
         }
+        /// <summary>
+        /// <see cref="CurrentMax"/>が変更された時に実行
+        /// </summary>
+        public event EventHandler<ToolValueEventArgs<float>> CurrentMaxChanged;
+        /// <summary>
+        /// <see cref="CurrentMin"/>が変更された時に実行
+        /// </summary>
+        public event EventHandler<ToolValueEventArgs<float>> CurrentMinChanged;
+        /// <summary>
+        /// <see cref="CurrentMax"/>が変更された時に実行
+        /// </summary>
+        /// <param name="e"><see cref="CurrentMax"/>の変更前後が与えられた<see cref="ToolValueEventArgs{T}"/>のインスタンス</param>
+        protected virtual void OnCurrentMaxChanged(ToolValueEventArgs<float> e)
+        {
+            CurrentMaxChanged?.Invoke(this, e);
+        }
+        /// <summary>
+        /// <see cref="CurrentMin"/>が変更された時に実行
+        /// </summary>
+        /// <param name="e"><see cref="CurrentMin"/>の変更前後が与えられた<see cref="ToolValueEventArgs{T}"/>のインスタンス</param>
+        protected virtual void OnCurrentMinChanged(ToolValueEventArgs<float> e)
+        {
+            CurrentMinChanged?.Invoke(this, e);
+        }
         internal override void Update()
         {
             var currentMin = _currentMin;
@@ -69,13 +85,15 @@ namespace Altseed2.ToolAuxiliary
             if (!Engine.Tool.DragFloatRange2(Label ?? string.Empty, ref currentMin, ref currentMax, Speed, Min, Max)) return;
             if (_currentMin != currentMin)
             {
-                CurrentMinChanged?.Invoke(this, new ToolValueEventArgs<float>(_currentMin, currentMin));
+                var old = _currentMin;
                 _currentMin = currentMin;
+                OnCurrentMinChanged(new ToolValueEventArgs<float>(old, currentMin));
             }
             if (_currentMax != currentMax)
             {
-                CurrentMaxChanged?.Invoke(this, new ToolValueEventArgs<float>(_currentMax, currentMax));
+                var old = _currentMax;
                 _currentMax = currentMax;
+                OnCurrentMaxChanged(new ToolValueEventArgs<float>(old, currentMax));
             }
         }
     }

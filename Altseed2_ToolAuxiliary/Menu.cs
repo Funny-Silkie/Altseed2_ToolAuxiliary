@@ -53,7 +53,11 @@ namespace Altseed2.ToolAuxiliary
         /// <summary>
         /// クリックされた時に実行
         /// </summary>
-        protected virtual void OnClicked() { }
+        /// <param name="e">与えられる<see cref="EventArgs"/>のインスタンス</param>
+        protected virtual void OnClicked(EventArgs e)
+        {
+            Clicked?.Invoke(this, e);
+        }
         /// <summary>
         /// コンポーネントを削除する
         /// </summary>
@@ -64,8 +68,7 @@ namespace Altseed2.ToolAuxiliary
         internal override void Update()
         {
             if (!Engine.Tool.BeginMenu(Label ?? string.Empty, Enabled)) return;
-            Clicked?.Invoke(this, EventArgs.Empty);
-            OnClicked();
+            OnClicked(EventArgs.Empty);
             for (int i = 0; i < container.Count; i++) container[i].DoUpdate();
             Engine.Tool.EndMenu();
         }

@@ -79,7 +79,7 @@ namespace Altseed2.ToolAuxiliary
         public ImageButton() { }
         internal override void Update()
         {
-            if (Engine.Tool.ImageButton(Texture, Size, uv0, uv1, FrameSize, Color, Color)) OnClicked();
+            if (Engine.Tool.ImageButton(Texture, Size, uv0, uv1, FrameSize, Color, Color)) OnClicked(EventArgs.Empty);
         }
     }
 }

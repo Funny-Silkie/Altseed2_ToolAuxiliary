@@ -45,12 +45,15 @@ namespace Altseed2.ToolAuxiliary
         /// <summary>
         /// クリックされた時に実行
         /// </summary>
-        protected virtual void OnClicked() { }
+        /// <param name="e">与えられる<see cref="EventArgs"/>のインスタンス</param>
+        protected virtual void OnClicked(EventArgs e)
+        {
+            Clicked?.Invoke(this, e);
+        }
         internal override void Update()
         {
             if (!Engine.Tool.MenuItem(Label ?? string.Empty, ShortCut ?? string.Empty, Selected, Enabled)) return;
-            Clicked?.Invoke(this, EventArgs.Empty);
-            OnClicked();
+            OnClicked(EventArgs.Empty);
         }
     }
 }

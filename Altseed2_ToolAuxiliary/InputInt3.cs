@@ -115,18 +115,6 @@ namespace Altseed2.ToolAuxiliary
         /// </summary>
         public int Value3 { get; set; }
         /// <summary>
-        /// <see cref="Value1"/>が変更された時に実行
-        /// </summary>
-        public event EventHandler<ToolValueEventArgs<int>> Value1Changed;
-        /// <summary>
-        /// <see cref="Value2"/>が変更された時に実行
-        /// </summary>
-        public event EventHandler<ToolValueEventArgs<int>> Value2Changed;
-        /// <summary>
-        /// <see cref="Value3"/>が変更された時に実行
-        /// </summary>
-        public event EventHandler<ToolValueEventArgs<int>> Value3Changed;
-        /// <summary>
         /// 既定の値を用いて<see cref="InputInt3"/>の新しいインスタンスを生成する
         /// </summary>
         public InputInt3() : this(string.Empty, default, default, default) { }
@@ -144,6 +132,42 @@ namespace Altseed2.ToolAuxiliary
             Value2 = value2;
             Value3 = value3;
         }
+        /// <summary>
+        /// <see cref="Value1"/>が変更された時に実行
+        /// </summary>
+        public event EventHandler<ToolValueEventArgs<int>> Value1Changed;
+        /// <summary>
+        /// <see cref="Value2"/>が変更された時に実行
+        /// </summary>
+        public event EventHandler<ToolValueEventArgs<int>> Value2Changed;
+        /// <summary>
+        /// <see cref="Value3"/>が変更された時に実行
+        /// </summary>
+        public event EventHandler<ToolValueEventArgs<int>> Value3Changed;
+        /// <summary>
+        /// <see cref="Value1"/>が変更された時に実行
+        /// </summary>
+        /// <param name="e"><see cref="Value1"/>の変更前後を与えられた<see cref="ToolValueEventArgs{T}"/>のインスタンス</param>
+        protected virtual void OnValue1Changed(ToolValueEventArgs<int> e)
+        {
+            Value1Changed?.Invoke(this, e);
+        }
+        /// <summary>
+        /// <see cref="Value2"/>が変更された時に実行
+        /// </summary>
+        /// <param name="e"><see cref="Value2"/>の変更前後を与えられた<see cref="ToolValueEventArgs{T}"/>のインスタンス</param>
+        protected virtual void OnValue2Changed(ToolValueEventArgs<int> e)
+        {
+            Value2Changed?.Invoke(this, e);
+        }
+        /// <summary>
+        /// <see cref="Value3"/>が変更された時に実行
+        /// </summary>
+        /// <param name="e"><see cref="Value3"/>の変更前後を与えられた<see cref="ToolValueEventArgs{T}"/>のインスタンス</param>
+        protected virtual void OnValue3Changed(ToolValueEventArgs<int> e)
+        {
+            Value3Changed?.Invoke(this, e);
+        }
         internal override void Update()
         {
             var array = new[] { Value1, Value2, Value3 };
@@ -153,18 +177,21 @@ namespace Altseed2.ToolAuxiliary
             array[2] = MathHelper.Clamp(array[2], _max3, _min3);
             if (Value1 != array[0])
             {
-                Value1Changed?.Invoke(this, new ToolValueEventArgs<int>(Value1, array[0]));
+                var old = Value1;
                 Value1 = array[0];
+                OnValue1Changed(new ToolValueEventArgs<int>(old, array[0]));
             }
             if (Value2 != array[1])
             {
-                Value2Changed?.Invoke(this, new ToolValueEventArgs<int>(Value2, array[1]));
+                var old = Value2;
                 Value2 = array[1];                
+                OnValue2Changed(new ToolValueEventArgs<int>(old, array[1]));
             }
             if (Value3 != array[2])
             {
-                Value3Changed?.Invoke(this, new ToolValueEventArgs<int>(Value3, array[2]));
+                var old = Value3;
                 Value3 = array[2];                
+                OnValue3Changed(new ToolValueEventArgs<int>(old, array[2]));
             }
         }
     }

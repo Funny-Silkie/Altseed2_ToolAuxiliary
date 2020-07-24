@@ -16,7 +16,6 @@ namespace Altseed2.ToolAuxiliary
         /// 表示される文字列を取得または設定する
         /// </summary>
         public string Label { get; set; }
-        public event EventHandler<ToolValueEventArgs<bool>> ChangeChecked;
         /// <summary>
         /// 既定の情報を持つ<see cref="CheckBox"/>の新しいインスタンスを生成する
         /// </summary>
@@ -31,13 +30,26 @@ namespace Altseed2.ToolAuxiliary
             Checked = check;
             Label = label;
         }
+        /// <summary>
+        /// <see cref="Checked"/>が変更された時に実行
+        /// </summary>
+        public event EventHandler<ToolValueEventArgs<bool>> ChangeChecked;
+        /// <summary>
+        /// <see cref="Checked"/>が変更された時に実行
+        /// </summary>
+        /// <param name="e"><see cref="Checked"/>の変更前後が与えられた<see cref="ToolValueEventArgs{T}"/>のインスタンス</param>
+        protected virtual void OnChangeChecked(ToolValueEventArgs<bool> e)
+        {
+            ChangeChecked?.Invoke(this, e);
+        }
         internal override void Update()
         {
             var c = Checked;
             if (!Engine.Tool.CheckBox(Label ?? string.Empty, ref c)) return;
             if (c == Checked) return;
-            ChangeChecked?.Invoke(this, new ToolValueEventArgs<bool>(Checked, c));
+            var old = Checked;
             Checked = c;
+            OnChangeChecked(new ToolValueEventArgs<bool>(old, c));
         }
     }
 }

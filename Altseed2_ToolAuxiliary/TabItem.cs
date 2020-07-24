@@ -21,10 +21,6 @@ namespace Altseed2.ToolAuxiliary
         /// </summary>
         public string Label { get; set; }
         /// <summary>
-        /// クリックされた時に実行
-        /// </summary>
-        public event EventHandler Clicked;
-        /// <summary>
         /// 既定の文字列を持つ<see cref="TabItem"/>の新しいインスタンスを生成する
         /// </summary>
         public TabItem() : this(string.Empty) { }
@@ -36,6 +32,10 @@ namespace Altseed2.ToolAuxiliary
         {
             Label = label;
         }
+        /// <summary>
+        /// クリックされた時に実行
+        /// </summary>
+        public event EventHandler Clicked;
         /// <summary>
         /// コンポーネントを追加する
         /// </summary>
@@ -50,7 +50,11 @@ namespace Altseed2.ToolAuxiliary
         /// <summary>
         /// クリックされた時に実行
         /// </summary>
-        protected virtual void OnClick() { }
+        /// <param name="e">与えられる<see cref="EventArgs"/>のインスタンス</param>
+        protected virtual void OnClick(EventArgs e)
+        {
+            Clicked?.Invoke(this, e);
+        }
         /// <summary>
         /// コンポーネントを削除する
         /// </summary>
@@ -61,8 +65,7 @@ namespace Altseed2.ToolAuxiliary
         internal override void Update()
         {
             if (!Engine.Tool.BeginTabItem(Label)) return;
-            Clicked?.Invoke(this, EventArgs.Empty);
-            OnClick();
+            OnClick(EventArgs.Empty);
             for (int i = 0; i < container.Count; i++) container[i].DoUpdate();
             Engine.Tool.EndTabItem();
         }

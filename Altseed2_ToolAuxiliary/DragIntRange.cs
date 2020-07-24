@@ -39,14 +39,6 @@ namespace Altseed2.ToolAuxiliary
         }
         private int _currentMin = RuledMinimum;
         /// <summary>
-        /// <see cref="CurrentMax"/>が変更された時に実行
-        /// </summary>
-        public event EventHandler<ToolValueEventArgs<int>> CurrentMaxChanged;
-        /// <summary>
-        /// <see cref="CurrentMin"/>が変更された時に実行
-        /// </summary>
-        public event EventHandler<ToolValueEventArgs<int>> CurrentMinChanged;
-        /// <summary>
         /// 既定の値を用いて<see cref="DragIntRange"/>の新しいインスタンスを生成する
         /// </summary>
         public DragIntRange() : this(string.Empty, default, default) { }
@@ -62,6 +54,30 @@ namespace Altseed2.ToolAuxiliary
             CurrentMin = currentMin;
             CurrentMax = currentMax;
         }
+        /// <summary>
+        /// <see cref="CurrentMax"/>が変更された時に実行
+        /// </summary>
+        public event EventHandler<ToolValueEventArgs<int>> CurrentMaxChanged;
+        /// <summary>
+        /// <see cref="CurrentMin"/>が変更された時に実行
+        /// </summary>
+        public event EventHandler<ToolValueEventArgs<int>> CurrentMinChanged;
+        /// <summary>
+        /// <see cref="CurrentMax"/>が変更された時に実行
+        /// </summary>
+        /// <param name="e"><see cref="CurrentMax"/>の変更前後が与えられた<see cref="ToolValueEventArgs{T}"/>のインスタンス</param>
+        protected virtual void OnCurrentMaxChanged(ToolValueEventArgs<int> e)
+        {
+            CurrentMaxChanged?.Invoke(this, e);
+        }
+        /// <summary>
+        /// <see cref="CurrentMin"/>が変更された時に実行
+        /// </summary>
+        /// <param name="e"><see cref="CurrentMin"/>の変更前後が与えられた<see cref="ToolValueEventArgs{T}"/>のインスタンス</param>
+        protected virtual void OnCurrentMinChanged(ToolValueEventArgs<int> e)
+        {
+            CurrentMinChanged?.Invoke(this, e);
+        }
         internal override void Update()
         {
             var currentMin = _currentMin;
@@ -69,13 +85,15 @@ namespace Altseed2.ToolAuxiliary
             if (!Engine.Tool.DragIntRange2(Label ?? string.Empty, ref currentMin, ref currentMax, Speed, Min, Max)) return;
             if (_currentMin != currentMin)
             {
-                CurrentMinChanged?.Invoke(this, new ToolValueEventArgs<int>(_currentMin, currentMin));
+                var old = _currentMin;
                 _currentMin = currentMin;
+                OnCurrentMinChanged(new ToolValueEventArgs<int>(old, currentMin));
             }
             if (_currentMax != currentMax)
             {
-                CurrentMaxChanged?.Invoke(this, new ToolValueEventArgs<int>(_currentMax, currentMax));
+                var old = _currentMax;
                 _currentMax = currentMax;
+                OnCurrentMaxChanged(new ToolValueEventArgs<int>(old, currentMax));
             }
         }
     }
