@@ -31,7 +31,11 @@ namespace Altseed2.ToolAuxiliary
         ToolComponent IToolComponent.AsToolComponent() => this;
         internal void DoUpdate(bool force = false)
         {
-            if (force || IsUpdated) Update();
+            if (force || IsUpdated)
+            {
+                Update();
+                OnUpdate();
+            }
         }
         internal void InvokeOnRegistered() => OnRegistered(EventArgs.Empty);
         internal void InvokeOnUnRegistered() => OnUnRegistered(EventArgs.Empty);
@@ -51,6 +55,10 @@ namespace Altseed2.ToolAuxiliary
         {
             UnRegistered?.Invoke(this, e);
         }
+        /// <summary>
+        /// 更新された時に実行
+        /// </summary>
+        protected virtual void OnUpdate() { }
         internal abstract void Update();
     }
     /// <summary>
