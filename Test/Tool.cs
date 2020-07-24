@@ -52,8 +52,8 @@ namespace Test
             };
             ToolHelper.AddComponent(new Text("Text2", new Color(255, 100, 100)));
             ToolHelper.AddComponent(button);
-            ToolHelper.AddComponent(new ColorEdit3("Color_3", new Color(255, 255, 100)));
-            ToolHelper.AddComponent(new ColorEdit4("Color_4", new Color(255, 255, 100)));
+            ToolHelper.AddComponent(new ColorEdit("Color_3", new Color(255, 255, 100)) { EditAlpha = false });
+            ToolHelper.AddComponent(new ColorEdit("Color_4", new Color(255, 255, 100)) { EditAlpha = true });
             while (Engine.DoEvents())
             {
                 ToolHelper.Update();
