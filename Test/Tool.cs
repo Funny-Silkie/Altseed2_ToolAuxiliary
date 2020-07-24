@@ -8,6 +8,23 @@ namespace Test
     public class Tool
     {
         [Test, Apartment(System.Threading.ApartmentState.STA)]
+        public void Empty()
+        {
+            Engine.Initialize("Empry", 960, 720, new Configuration()
+            {
+                ToolEnabled = true
+            });
+            ToolHelper.Name = "Tool1";
+            ToolHelper.Size = new Vector2I(250, 250);
+            ToolHelper.WindowFlags = ToolWindow.NoResize | ToolWindow.NoCollapse | ToolWindow.NoMove;
+            while (Engine.DoEvents())
+            {
+                ToolHelper.Update();
+                Engine.Update();
+            }
+            Engine.Terminate();
+        }
+        [Test, Apartment(System.Threading.ApartmentState.STA)]
         public void Tool1()
         {
             Engine.Initialize("Tool1", 960, 720, new Configuration()
