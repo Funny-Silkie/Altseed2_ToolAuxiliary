@@ -15,7 +15,7 @@ namespace Test
                 ToolEnabled = true
             });
             ToolHelper.Name = "Tool1";
-            ToolHelper.Size = new Vector2I(250, 250);
+            ToolHelper.Size = new Vector2I(960, 720);
             ToolHelper.WindowFlags = ToolWindow.NoResize | ToolWindow.NoCollapse | ToolWindow.NoMove;
             while (Engine.DoEvents())
             {
