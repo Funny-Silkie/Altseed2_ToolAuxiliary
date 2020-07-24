@@ -6,16 +6,12 @@ namespace Altseed2.ToolAuxiliary
     /// 選択可能ラベルのクラス
     /// </summary>
     [Serializable]
-    public class Selectable : ToolComponent
+    public class Selectable : ToolComponent, IToolSelectable
     {
         /// <summary>
         /// チェックされているかどうかを取得または設定する
         /// </summary>
         public bool Checked { get; set; }
-        /// <summary>
-        /// 諸設定を取得または設定する
-        /// </summary>
-        public ToolSelectable Flags { get; set; }
         /// <summary>
         /// 表示される文字列を取得または設定する
         /// </summary>
@@ -55,5 +51,64 @@ namespace Altseed2.ToolAuxiliary
             Checked = c;
             OnChangeChecked(new ToolValueEventArgs<bool>(old, c));
         }
+        #region IToolSelectable
+        private bool flagChanged;
+        /// <summary>
+        /// ダブルクリックでもイベントが作動するかどうかを取得または設定する
+        /// </summary>
+        public bool AllowDoubleClick
+        {
+            get => _allowDoubleClick;
+            set
+            {
+                if (_allowDoubleClick == value) return;
+                _allowDoubleClick = value;
+                flagChanged = true;
+            }
+        }
+        private bool _allowDoubleClick;
+        /// <summary>
+        /// 選択可能かどうかを取得または設定する
+        /// </summary>
+        public bool Enabled
+        {
+            get => _enabled;
+            set
+            {
+                if (_enabled == value) return;
+                _enabled = value;
+                flagChanged = true;
+            }
+        }
+        private bool _enabled = true;
+        internal ToolSelectable Flags
+        {
+            get
+            {
+                if (flagChanged)
+                {
+                    _flags = FlagCalculator.CalcToolSelectable(this);
+                    flagChanged = false;
+                }
+                return _flags;
+            }
+        }
+        private ToolSelectable _flags;
+        ToolSelectable IToolSelectable.Flags => Flags;
+        /// <summary>
+        /// クリック時に親ポップアップウィンドウを開いたままにするかどうかを取得または設定する
+        /// </summary>
+        public bool KeepOpenPopups
+        {
+            get => _keepOpenPopups;
+            set
+            {
+                if (_keepOpenPopups == value) return;
+                _keepOpenPopups = value;
+                flagChanged = true;
+            }
+        }
+        private bool _keepOpenPopups;
+        #endregion
     }
 }

@@ -19,6 +19,15 @@
             if (inputText.UpperCaseFilter) result |= ToolInputText.CharsUppercase;
             return result;
         }
+        internal static ToolSelectable CalcToolSelectable(this IToolSelectable selectable)
+        {
+            if (selectable == null) return default;
+            var result = ToolSelectable.None;
+            if (selectable.AllowDoubleClick) result |= ToolSelectable.AllowDoubleClick;
+            if (!selectable.Enabled) result |= ToolSelectable.Disabled;
+            if (selectable.KeepOpenPopups) result |= ToolSelectable.DontClosePopups;
+            return result;
+        }
         internal static ToolTreeNode CalcToolTreeNode(this IToolTreeNode treeNode)
         {
             if (treeNode == null) return default;
