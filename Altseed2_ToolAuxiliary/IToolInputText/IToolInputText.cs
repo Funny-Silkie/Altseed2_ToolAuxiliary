@@ -27,7 +27,7 @@ namespace Altseed2.ToolAuxiliary
         /// 上書きモードかどうかを取得する
         /// </summary>
         /// <remarks>falseの時は挿入モード</remarks>
-        bool IsOverrideMode { get; }
+        bool IsOverwriteMode { get; }
         /// <summary>
         /// 入力した文字列を*で隠すかどうかを取得する
         /// </summary>

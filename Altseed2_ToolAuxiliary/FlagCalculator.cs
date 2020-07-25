@@ -40,7 +40,7 @@
             if ((inputText.CharType & (IToolInputText.InputTextCharType)2) == (IToolInputText.InputTextCharType)2) result |= ToolInputText.CharsDecimal;
             if ((inputText.CharType & IToolInputText.InputTextCharType.Hexadecimal) == (IToolInputText.InputTextCharType)4) result |= ToolInputText.CharsHexadecimal;
             if (!inputText.EnableHorizontalScroll) result |= ToolInputText.NoHorizontalScroll;
-            if (inputText.IsOverrideMode) result |= ToolInputText.AlwaysInsertMode;
+            if (inputText.IsOverwriteMode) result |= ToolInputText.AlwaysInsertMode;
             if (inputText.IsPasswordMode) result |= ToolInputText.Password;
             if (inputText.IsReadOnly) result |= ToolInputText.ReadOnly;
             if (inputText.NoBlank) result |= ToolInputText.CharsNoBlank;

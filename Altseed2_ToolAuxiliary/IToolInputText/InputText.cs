@@ -128,7 +128,7 @@ namespace Altseed2.ToolAuxiliary
         /// 上書きモードかどうかを取得または設定する
         /// </summary>
         /// <remarks>falseの時は挿入モード</remarks>
-        public bool IsOverrideMode
+        public bool IsOverwriteMode
         {
             get => _isOverrideMode;
             set
