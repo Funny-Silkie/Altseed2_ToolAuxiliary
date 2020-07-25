@@ -2,6 +2,35 @@
 {
     internal static class FlagCalculator
     {
+        internal static ToolColorEdit CalcToolColorEdit(this IToolColorEdit colorEdit)
+        {
+            if (colorEdit == null) return default;
+            var result = ToolColorEdit.None;
+            if (!colorEdit.EditAlpha) result |= ToolColorEdit.NoAlpha;
+            switch (colorEdit.InputType)
+            {
+                case IToolColorEdit.ColorEditInputType.None: result |= ToolColorEdit.NoInputs; break;
+                case IToolColorEdit.ColorEditInputType.RGB: result |= ToolColorEdit.DisplayRGB; break;
+                case IToolColorEdit.ColorEditInputType.HSV: result |= ToolColorEdit.DisplayHSV; break;
+                case IToolColorEdit.ColorEditInputType.ColorCode: result |= ToolColorEdit.DisplayHex; break;
+            }
+            switch (colorEdit.PickerType)
+            {
+                case IToolColorEdit.ColorEditPickerType.Bar: result |= ToolColorEdit.PickerHueBar; break;
+                case IToolColorEdit.ColorEditPickerType.Wheel: result |= ToolColorEdit.PickerHueWheel; break;
+            }
+            if (colorEdit.ShowAlphaBar) result |= ToolColorEdit.AlphaBar;
+            if (!colorEdit.ShowInputOption) result |= ToolColorEdit.NoOptions;
+            if (!colorEdit.ShowLabel) result |= ToolColorEdit.NoLabel;
+            if (!colorEdit.ShowPicker) result |= ToolColorEdit.NoPicker;
+            if (!colorEdit.ShowSmallPreview) result |= ToolColorEdit.NoSmallPreview;
+            switch (colorEdit.ValueType)
+            {
+                case IToolColorEdit.ColorEditValueType.Float: result |= ToolColorEdit.Float; break;
+                case IToolColorEdit.ColorEditValueType.UInt8: result |= ToolColorEdit.Uint8; break;
+            }
+            return result;
+        }
         internal static ToolInputText CalcToolInputText(this IToolInputText inputText)
         {
             if (inputText == null) return default;
