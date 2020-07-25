@@ -67,7 +67,7 @@ namespace Altseed2.ToolAuxiliary
             OnTextChanged(new ToolValueEventArgs<string>(old, text));
         }
         #region IToolInputText
-        private bool flagChanged;
+        private bool flagChanged = true;
         /// <summary>
         /// マウスでフォーカスしたときテキスト全体を選択するかどうか取得または設定する
         /// </summary>

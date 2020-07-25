@@ -52,7 +52,7 @@ namespace Altseed2.ToolAuxiliary
             OnChangeChecked(new ToolValueEventArgs<bool>(old, c));
         }
         #region IToolSelectable
-        private bool flagChanged;
+        private bool flagChanged = true;
         /// <summary>
         /// ダブルクリックでもイベントが作動するかどうかを取得または設定する
         /// </summary>

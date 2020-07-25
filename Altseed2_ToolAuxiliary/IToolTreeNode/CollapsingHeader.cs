@@ -69,20 +69,7 @@ namespace Altseed2.ToolAuxiliary
             for (int i = 0; i < container.Count; i++) container[i].DoUpdate();
         }
         #region IToolTreeNode
-        private bool flagChanged;
-        internal ToolTreeNode Flags
-        {
-            get
-            {
-                if (flagChanged)
-                {
-                    flags = FlagCalculator.CalcToolTreeNode(this);
-                    flagChanged = false;
-                }
-                return flags;
-            }
-        }
-        private ToolTreeNode flags;
+        private bool flagChanged = true;
         /// <summary>
         /// 常に開いているかどうかを取得または設定する
         /// </summary>
@@ -125,6 +112,19 @@ namespace Altseed2.ToolAuxiliary
             }
         }
         private bool _defaultOpened;
+        internal ToolTreeNode Flags
+        {
+            get
+            {
+                if (flagChanged)
+                {
+                    flags = FlagCalculator.CalcToolTreeNode(this);
+                    flagChanged = false;
+                }
+                return flags;
+            }
+        }
+        private ToolTreeNode flags;
         ToolTreeNode IToolTreeNode.Flags => Flags;
         IToolTreeNode.TreeNodeFrameType IToolTreeNode.FrameType => IToolTreeNode.TreeNodeFrameType.Framed;
         /// <summary>

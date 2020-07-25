@@ -59,7 +59,7 @@ namespace Altseed2.ToolAuxiliary
             Engine.Tool.EndTabBar();
         }
         #region IToolTabBar
-        private bool flagChanged;
+        private bool flagChanged = true;
         /// <summary>
         /// 入りきらないタブの表示方法を取得または設定する
         /// </summary>
