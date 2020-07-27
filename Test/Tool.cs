@@ -231,6 +231,9 @@ namespace Test
             tooltip.AddComponent(new ArrowButton("3", ToolDir.Right));
             tooltip.AddComponent(new ArrowButton("4", ToolDir.Up));
             ToolHelper.AddComponent(tooltip);
+            ToolHelper.AddComponent(new SingleRadioButton("Single1"));
+            ToolHelper.AddComponent(new SingleRadioButton("Single2"));
+            ToolHelper.AddComponent(new MultiRadioButton(("Multi1", 0), ("Multi2", 1), ("Multi3", 2)));
             while (Engine.DoEvents())
             {
                 ToolHelper.Update();
