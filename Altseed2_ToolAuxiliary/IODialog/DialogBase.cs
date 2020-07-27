@@ -17,6 +17,10 @@ namespace Altseed2.ToolAuxiliary
         /// </summary>
         public string InitialDirectory { get; set; }
         /// <summary>
+        /// <see cref="DialogBase"/>の新しいインスタンスを生成する
+        /// </summary>
+        protected DialogBase() { }
+        /// <summary>
         /// <see cref="InitialDirectory"/>をカレントディレクトリに設定する
         /// </summary>
         public void SetCurrentDirectory()
