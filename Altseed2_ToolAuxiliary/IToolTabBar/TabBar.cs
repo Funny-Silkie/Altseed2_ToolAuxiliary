@@ -74,7 +74,7 @@ namespace Altseed2.ToolAuxiliary
             }
         }
         private IToolTabBar.TabBarFittingType _fittingType;
-        internal ToolTabBar Flags
+        internal ToolTabBarFlags Flags
         {
             get
             {
@@ -86,8 +86,8 @@ namespace Altseed2.ToolAuxiliary
                 return _flags;
             }
         }
-        private ToolTabBar _flags;
-        ToolTabBar IToolTabBar.Flags => Flags;
+        private ToolTabBarFlags _flags;
+        ToolTabBarFlags IToolTabBar.Flags => Flags;
         /// <summary>
         /// タブを並び替えられるかどうかを取得または設定する
         /// </summary>

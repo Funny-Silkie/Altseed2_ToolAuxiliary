@@ -16,7 +16,7 @@
         /// <summary>
         /// 使用する設定を取得する
         /// </summary>
-        ToolSelectable Flags { get; }
+        ToolSelectableFlags Flags { get; }
         /// <summary>
         /// クリック時に親ポップアップウィンドウを開いたままにするかどうかを取得する
         /// </summary>

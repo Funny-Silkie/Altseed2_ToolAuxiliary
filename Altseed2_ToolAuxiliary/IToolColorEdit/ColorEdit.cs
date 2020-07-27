@@ -67,7 +67,7 @@ namespace Altseed2.ToolAuxiliary
             }
         }
         private bool _editAlpha = true;
-        internal ToolColorEdit Flags
+        internal ToolColorEditFlags Flags
         {
             get
             {
@@ -79,8 +79,8 @@ namespace Altseed2.ToolAuxiliary
                 return _flag;
             }
         }
-        private ToolColorEdit _flag;
-        ToolColorEdit IToolColorEdit.Flags => Flags;
+        private ToolColorEditFlags _flag;
+        ToolColorEditFlags IToolColorEdit.Flags => Flags;
         /// <summary>
         /// ウィンドウに表示されるインプットの種類を取得または設定する
         /// </summary>

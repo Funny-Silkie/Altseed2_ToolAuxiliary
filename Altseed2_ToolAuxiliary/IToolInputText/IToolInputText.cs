@@ -22,7 +22,7 @@ namespace Altseed2.ToolAuxiliary
         /// <summary>
         /// 使用する設定を取得する
         /// </summary>
-        ToolInputText Flags { get; }
+        ToolInputTextFlags Flags { get; }
         /// <summary>
         /// 上書きモードかどうかを取得する
         /// </summary>

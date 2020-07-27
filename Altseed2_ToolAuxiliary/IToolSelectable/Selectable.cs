@@ -81,7 +81,7 @@ namespace Altseed2.ToolAuxiliary
             }
         }
         private bool _enabled = true;
-        internal ToolSelectable Flags
+        internal ToolSelectableFlags Flags
         {
             get
             {
@@ -93,8 +93,8 @@ namespace Altseed2.ToolAuxiliary
                 return _flags;
             }
         }
-        private ToolSelectable _flags;
-        ToolSelectable IToolSelectable.Flags => Flags;
+        private ToolSelectableFlags _flags;
+        ToolSelectableFlags IToolSelectable.Flags => Flags;
         /// <summary>
         /// クリック時に親ポップアップウィンドウを開いたままにするかどうかを取得または設定する
         /// </summary>

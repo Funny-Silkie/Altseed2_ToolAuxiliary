@@ -113,7 +113,7 @@ namespace Altseed2.ToolAuxiliary
             }
         }
         private bool _defaultOpened;
-        internal ToolTreeNode Flags
+        internal ToolTreeNodeFlags Flags
         {
             get
             {
@@ -125,8 +125,8 @@ namespace Altseed2.ToolAuxiliary
                 return flags;
             }
         }
-        private ToolTreeNode flags;
-        ToolTreeNode IToolTreeNode.Flags => Flags;
+        private ToolTreeNodeFlags flags;
+        ToolTreeNodeFlags IToolTreeNode.Flags => Flags;
         /// <summary>
         /// 枠の種類を取得または設定する
         /// </summary>

@@ -112,7 +112,7 @@ namespace Altseed2.ToolAuxiliary
             }
         }
         private bool _defaultOpened;
-        internal ToolTreeNode Flags
+        internal ToolTreeNodeFlags Flags
         {
             get
             {
@@ -124,8 +124,8 @@ namespace Altseed2.ToolAuxiliary
                 return flags;
             }
         }
-        private ToolTreeNode flags;
-        ToolTreeNode IToolTreeNode.Flags => Flags;
+        private ToolTreeNodeFlags flags;
+        ToolTreeNodeFlags IToolTreeNode.Flags => Flags;
         IToolTreeNode.TreeNodeFrameType IToolTreeNode.FrameType => IToolTreeNode.TreeNodeFrameType.Framed;
         /// <summary>
         /// 矢印のクリックのみで開閉判定を行うかどうかを取得または設定する

@@ -110,7 +110,7 @@ namespace Altseed2.ToolAuxiliary
             }
         }
         private bool _enableHorizonalScroll = true;
-        internal ToolInputText Flags
+        internal ToolInputTextFlags Flags
         {
             get
             {
@@ -122,8 +122,8 @@ namespace Altseed2.ToolAuxiliary
                 return _flags;
             }
         }
-        private ToolInputText _flags;
-        ToolInputText IToolInputText.Flags => Flags;
+        private ToolInputTextFlags _flags;
+        ToolInputTextFlags IToolInputText.Flags => Flags;
         /// <summary>
         /// 上書きモードかどうかを取得または設定する
         /// </summary>

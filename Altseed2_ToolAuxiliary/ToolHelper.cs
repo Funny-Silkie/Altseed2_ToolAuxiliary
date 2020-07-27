@@ -63,7 +63,7 @@ namespace Altseed2.ToolAuxiliary
         /// <summary>
         /// ツールウィンドウにおける設定を取得または設定する
         /// </summary>
-        public static ToolWindow WindowFlags { get; set; }
+        public static ToolWindowFlags WindowFlags { get; set; }
         /// <summary>
         /// コンポーネントを追加する
         /// </summary>
@@ -75,10 +75,10 @@ namespace Altseed2.ToolAuxiliary
         /// 登録されているコンポーネントを全て削除する
         /// </summary>
         public static void ClearComponents() => container.Clear();
-        private static ToolWindow GetFlags()
+        private static ToolWindowFlags GetFlags()
         {
             var result = WindowFlags;
-            if (MenuBar != null) result |= ToolWindow.MenuBar;
+            if (MenuBar != null) result |= ToolWindowFlags.MenuBar;
             return result;
         }
         /// <summary>

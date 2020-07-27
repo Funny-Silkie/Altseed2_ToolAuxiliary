@@ -14,7 +14,7 @@ namespace Altseed2.ToolAuxiliary
         /// <summary>
         /// 使用する設定を取得する
         /// </summary>
-        ToolColorEdit Flags { get; }
+        ToolColorEditFlags Flags { get; }
         /// <summary>
         /// ウィンドウに表示されるインプットの種類を取得する
         /// </summary>
