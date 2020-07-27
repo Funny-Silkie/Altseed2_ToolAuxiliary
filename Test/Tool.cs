@@ -235,6 +235,7 @@ namespace Test
             ToolHelper.AddComponent(new SingleRadioButton("Single1"));
             ToolHelper.AddComponent(new SingleRadioButton("Single2"));
             ToolHelper.AddComponent(new MultiRadioButton(("Multi1", 0), ("Multi2", 1), ("Multi3", 2)));
+            ToolHelper.AddComponent(new InputTextMultiLine("MultiLine", "Text", new Vector2F(300, 200)));
             while (Engine.DoEvents())
             {
                 ToolHelper.Update();

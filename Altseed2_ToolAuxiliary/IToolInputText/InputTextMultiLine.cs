@@ -3,15 +3,11 @@
 namespace Altseed2.ToolAuxiliary
 {
     /// <summary>
-    /// 文字を格納するツールコンポーネントのクラス
+    /// 複数行の入力が可能なテキスト入力コンポーネントのクラス
     /// </summary>
     [Serializable]
-    public class InputText : ToolComponent, IToolInputText
+    public class InputTextMultiLine : ToolComponent, IToolInputText
     {
-        /// <summary>
-        /// 入力文字が無いときに表示されるヒントを取得または設定する
-        /// </summary>
-        public string Hint { get; set; }
         /// <summary>
         /// 表示される表題の文字列を取得または設定する
         /// </summary>
@@ -32,21 +28,27 @@ namespace Altseed2.ToolAuxiliary
         }
         private int _maxLength = 100;
         /// <summary>
+        /// コンポーネントのサイズを取得または設定する
+        /// </summary>
+        public Vector2F Size { get; set; }
+        /// <summary>
         /// 表示される文字列を取得または設定する
         /// </summary>
         public string Text { get; set; }
         /// <summary>
-        /// 既定の文字列を表示する<see cref="InputText"/>の新しいインスタンスを生成する
+        /// 既定の文字列を表示する<see cref="InputTextMultiLine"/>の新しいインスタンスを生成する
         /// </summary>
-        public InputText() : this(string.Empty, string.Empty) { }
+        public InputTextMultiLine() : this(string.Empty, string.Empty, new Vector2F(100f, 100f)) { }
         /// <summary>
-        /// 指定した文字列を表示する<see cref="InputText"/>の新しいインスタンスを生成する
+        /// 指定した文字列を表示する<see cref="InputTextMultiLine"/>の新しいインスタンスを生成する
         /// </summary>
         /// <param name="label">表題の文字列</param>
+        /// <param name="size">テキストボックスの大きさ</param>
         /// <param name="text">表示する文字列</param>
-        public InputText(string label, string text)
+        public InputTextMultiLine(string label, string text, Vector2F size)
         {
             Label = label;
+            Size = size;
             Text = text;
         }
         /// <summary>
@@ -64,7 +66,7 @@ namespace Altseed2.ToolAuxiliary
         internal override void Update()
         {
             var text = Text ?? string.Empty;
-            text = Hint != null ? Engine.Tool.InputTextWithHint(Label ?? string.Empty, Hint, text, _maxLength, Flags) : Engine.Tool.InputText(Label ?? string.Empty, text, _maxLength, Flags);
+            text = Engine.Tool.InputTextMultiline(Label ?? string.Empty, text, _maxLength, Size, Flags);
             if (text == null || Text == text) return;
             var old = Text;
             Text = text;
