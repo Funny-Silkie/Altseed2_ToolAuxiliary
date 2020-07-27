@@ -60,6 +60,7 @@ namespace Test
             });
             ToolHelper.AddComponent(new InputText("Text1", "Text")
             {
+                Hint = "Hint",
                 MaxLength = 2000
             });
             var button = new Button("Button");

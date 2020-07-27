@@ -9,6 +9,10 @@ namespace Altseed2.ToolAuxiliary
     public class InputText : ToolComponent, IToolInputText
     {
         /// <summary>
+        /// 入力文字が無いときに表示されるヒントを取得または設定する
+        /// </summary>
+        public string Hint { get; set; }
+        /// <summary>
         /// 表示される表題の文字列を取得または設定する
         /// </summary>
         public string Label { get; set; }
@@ -60,7 +64,7 @@ namespace Altseed2.ToolAuxiliary
         internal override void Update()
         {
             var text = Text ?? string.Empty;
-            text = Engine.Tool.InputText(Label ?? string.Empty, text, _maxLength, Flags);
+            text = Hint != null ? Engine.Tool.InputTextWithHint(Label ?? string.Empty, Hint, text, _maxLength, Flags) : Engine.Tool.InputText(Label ?? string.Empty, text, _maxLength, Flags);
             if (text == null || Text == text) return;
             var old = Text;
             Text = text;
