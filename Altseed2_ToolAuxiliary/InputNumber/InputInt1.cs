@@ -75,7 +75,7 @@ namespace Altseed2.ToolAuxiliary
         internal override void Update()
         {
             var value = Value;
-            if (Engine.Tool.InputInt(Label ?? string.Empty, ref value)) return;
+            if (!Engine.Tool.InputInt(Label ?? string.Empty, ref value)) return;
             value = MathHelper.Clamp(value, _max, _min);
             if (Value == value) return;
             var old = Value;
