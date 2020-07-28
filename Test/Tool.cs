@@ -302,5 +302,24 @@ namespace Test
             }
             Engine.Terminate();
         }
+        [Test, Apartment(System.Threading.ApartmentState.STA)]
+        public void Tool7()
+        {
+            Engine.Initialize("Tool7", 960, 720, new Configuration()
+            {
+                ToolEnabled = true
+            });
+            ToolHelper.Name = "Tool7";
+            ToolHelper.Size = new Vector2I(250, 350);
+            ToolHelper.WindowFlags = ToolWindowFlags.NoResize | ToolWindowFlags.NoCollapse | ToolWindowFlags.NoMove;
+            ToolHelper.AddComponent(new ColorButton());
+            while (Engine.DoEvents())
+            {
+                ToolHelper.Update();
+                Engine.Update();
+                if (Engine.Keyboard.GetKeyState(Key.Escape) == ButtonState.Push) break;
+            }
+            Engine.Terminate();
+        }
     }
 }
