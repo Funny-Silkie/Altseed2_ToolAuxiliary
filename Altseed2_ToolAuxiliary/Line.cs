@@ -42,7 +42,7 @@ namespace Altseed2.ToolAuxiliary
         {
             for (int i = 0; i < container.Count; i++)
             {
-                if (i > 0) Engine.Tool.SameLine();
+                if (i > 0 && container[i].IsUpdated) Engine.Tool.SameLine();
                 container[i].DoUpdate();
             }
         }
