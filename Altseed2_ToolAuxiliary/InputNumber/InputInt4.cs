@@ -219,7 +219,7 @@ namespace Altseed2.ToolAuxiliary
         internal override void Update()
         {
             var array = new[] { Value1, Value2, Value3, Value4 };
-            Engine.Tool.InputInt4(Label ?? string.Empty, array);
+            if (Engine.Tool.InputInt4(Label ?? string.Empty, array)) return;
             array[0] = MathHelper.Clamp(array[0], _max1, _min1);
             array[1] = MathHelper.Clamp(array[1], _max2, _min2);
             array[2] = MathHelper.Clamp(array[2], _max3, _min3);
