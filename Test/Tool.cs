@@ -1,4 +1,4 @@
-﻿using Altseed2;
+using Altseed2;
 using Altseed2.ToolAuxiliary;
 using System.Diagnostics;
 using NUnit.Framework;
@@ -90,7 +90,7 @@ namespace Test
             ToolHelper.Name = "Tool2";
             ToolHelper.Size = new Vector2I(250, 500);
             ToolHelper.WindowFlags = ToolWindowFlags.NoResize | ToolWindowFlags.NoCollapse | ToolWindowFlags.NoMove;
-            ToolHelper.AddComponent(new Combo<AlphaBlendMode>("Combo", new [] { AlphaBlendMode.Add, AlphaBlendMode.Multiply, AlphaBlendMode.Normal, AlphaBlendMode.Opacity, AlphaBlendMode.Subtract }));
+            ToolHelper.AddComponent(new Combo<AlphaBlend>("Combo", new [] { AlphaBlend.Add, AlphaBlend.Multiply, AlphaBlend.Normal, AlphaBlend.Opacity, AlphaBlend.Substract }));
             var imageButton = new ImageButton()
             {
                 Color = new Color(100, 255, 100),
@@ -105,7 +105,7 @@ namespace Test
                 FrameColor = new Color(255, 100, 100),
                 Texture = Texture2D.LoadStrict("Resources/Texture.png")
             });
-            ToolHelper.AddComponent(new ListBox<DrawMode>("List", new [] { DrawMode.Absolute, DrawMode.Fill, DrawMode.KeepAspect }));
+            ToolHelper.AddComponent(new ListBox<CollisionType>("List", new [] { CollisionType.Enter, CollisionType.Exit, CollisionType.Stay }));
             ToolHelper.AddComponent(new BulletTexts(new[] { "A", "B", "C" }));
             ToolHelper.AddComponent(new CheckBox("CheckBox", true));
             ToolHelper.AddComponent(new SliderInt1("Int1", 0));
