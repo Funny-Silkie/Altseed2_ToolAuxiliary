@@ -15,8 +15,7 @@ namespace Test
                 ToolEnabled = true
             });
             ToolHelper.Name = "Tool1";
-            ToolHelper.Size = new Vector2I(960, 720);
-            ToolHelper.WindowFlags = ToolWindowFlags.NoResize | ToolWindowFlags.NoCollapse | ToolWindowFlags.NoMove;
+            ToolHelper.Size = new Vector2F(260, 720);
             while (Engine.DoEvents())
             {
                 ToolHelper.Update();
@@ -32,8 +31,7 @@ namespace Test
                 ToolEnabled = true
             });
             ToolHelper.Name = "Tool1";
-            ToolHelper.Size = new Vector2I(250, 250);
-            ToolHelper.WindowFlags = ToolWindowFlags.NoResize | ToolWindowFlags.NoCollapse | ToolWindowFlags.NoMove;
+            ToolHelper.Size = new Vector2F(250, 250);
             ToolHelper.AddComponent(new InputInt1("Int1", 0)
             {
                 Max = 100,
@@ -88,8 +86,7 @@ namespace Test
                 ToolEnabled = true
             });
             ToolHelper.Name = "Tool2";
-            ToolHelper.Size = new Vector2I(250, 500);
-            ToolHelper.WindowFlags = ToolWindowFlags.NoResize | ToolWindowFlags.NoCollapse | ToolWindowFlags.NoMove;
+            ToolHelper.Size = new Vector2F(250, 500);
             ToolHelper.AddComponent(new Combo<AlphaBlend>("Combo", new [] { AlphaBlend.Add, AlphaBlend.Multiply, AlphaBlend.Normal, AlphaBlend.Opacity, AlphaBlend.Substract }));
             var imageButton = new ImageButton()
             {
@@ -132,8 +129,7 @@ namespace Test
                 ToolEnabled = true
             });
             ToolHelper.Name = "Tool3";
-            ToolHelper.Size = new Vector2I(250, 150);
-            ToolHelper.WindowFlags = ToolWindowFlags.NoResize | ToolWindowFlags.NoCollapse | ToolWindowFlags.NoMove;
+            ToolHelper.Size = new Vector2F(250, 150);
             ToolHelper.AddComponent(new ArrowButton("Arrow", ToolDir.Right));
             ToolHelper.AddComponent(new SliderAngle("Angle", 0f));
             ToolHelper.AddComponent(new DragFloat("Float", 0) { Speed = 3f });
@@ -169,8 +165,7 @@ namespace Test
                 ToolEnabled = true
             });
             ToolHelper.Name = "Tool4";
-            ToolHelper.Size = new Vector2I(250, 350);
-            ToolHelper.WindowFlags = ToolWindowFlags.NoResize | ToolWindowFlags.NoCollapse | ToolWindowFlags.NoMove;
+            ToolHelper.Size = new Vector2F(250, 350);
             var tabbar = new TabBar("TabBar");
             var tabItem1 = new TabItem("A");
             tabItem1.AddComponent(new Text("A1"));
@@ -213,8 +208,7 @@ namespace Test
                 ToolEnabled = true
             });
             ToolHelper.Name = "Tool5";
-            ToolHelper.Size = new Vector2I(250, 350);
-            ToolHelper.WindowFlags = ToolWindowFlags.NoResize | ToolWindowFlags.NoCollapse | ToolWindowFlags.NoMove;
+            ToolHelper.Size = new Vector2F(250, 350);
             ToolHelper.AddComponent(new ProgressBar("ProgressBar", 0f, 1f) { AddProgressValue = true });
             var group = new Group();
             group.AddComponent(new Text("A"));
@@ -252,8 +246,7 @@ namespace Test
                 ToolEnabled = true
             });
             ToolHelper.Name = "Tool6";
-            ToolHelper.Size = new Vector2I(250, 350);
-            ToolHelper.WindowFlags = ToolWindowFlags.NoResize | ToolWindowFlags.NoCollapse | ToolWindowFlags.NoMove;
+            ToolHelper.Size = new Vector2F(250, 350);
             var button_OpenMono = new Button("OpenMono");
             var dialog_Open = new OpenFileDialog()
             {
@@ -310,9 +303,16 @@ namespace Test
                 ToolEnabled = true
             });
             ToolHelper.Name = "Tool7";
-            ToolHelper.Size = new Vector2I(250, 350);
-            ToolHelper.WindowFlags = ToolWindowFlags.NoResize | ToolWindowFlags.NoCollapse | ToolWindowFlags.NoMove;
+            ToolHelper.Size = new Vector2F(250, 350);
             ToolHelper.AddComponent(new ColorButton());
+            var childWindow = new ChildWindow()
+            {
+                Size = new Vector2I(200, 100)
+            };
+            childWindow.AddComponent(new InputInt1("Int", 0));
+            childWindow.AddComponent(new Button("Button"));
+            childWindow.AddComponent(new MultiRadioButton(("Radio1", 0), ("Radio2", 1), ("Radio3", 2)));
+            ToolHelper.AddComponent(childWindow);
             while (Engine.DoEvents())
             {
                 ToolHelper.Update();

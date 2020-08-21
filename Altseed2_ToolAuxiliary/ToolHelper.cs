@@ -22,13 +22,17 @@ namespace Altseed2.ToolAuxiliary
         public static ReadOnlyCollection<ToolComponent> Components => container.AsReadOnly();
         private readonly static ComponentContainer<ToolComponent> container = new ComponentContainer<ToolComponent>();
         /// <summary>
+        /// ウィンドウがたたまれているかどうかを取得または設定する
+        /// </summary>
+        public static bool IsCollapsed { get; set; }
+        /// <summary>
         /// 使用するメニューバーを取得または設定する
         /// </summary>
         public static MenuBar MenuBar { get; set; }
         /// <summary>
         /// ウィンドウにつけられる名前を取得または設定する
         /// </summary>
-        public static string Name { get; set; }
+        public static string Name { get; set; } = "Tool Window";
         /// <summary>
         /// ウィンドウの座標を取得または設定する
         /// </summary>
@@ -49,17 +53,17 @@ namespace Altseed2.ToolAuxiliary
         /// ウィンドウの大きさを取得または設定する
         /// </summary>
         /// <exception cref="ArgumentOutOfRangeException">設定しようとした値の成分が0未満</exception>
-        public static Vector2I Size
+        public static Vector2F Size
         {
             get => _size;
             set
             {
                 if (_size == value) return;
-                if (value.X < 0 || value.Y < 0) throw new ArgumentOutOfRangeException(nameof(value), "設定しようとした値の成分が負の値です");
+                if (value.X <= 0 || value.Y <= 0) throw new ArgumentOutOfRangeException(nameof(value), "設定しようとした値の成分が負の値です");
                 _size = value;
             }
         }
-        private static Vector2I _size = new Vector2I(100, 100);
+        private static Vector2F _size = new Vector2F(100, 100);
         /// <summary>
         /// ツールウィンドウにおける設定を取得または設定する
         /// </summary>
@@ -93,11 +97,17 @@ namespace Altseed2.ToolAuxiliary
         /// </summary>
         public static void Update()
         {
-            Engine.Tool.SetNextWindowSize(_size, ToolCond.None);
-            Engine.Tool.SetNextWindowPos(Position, ToolCond.None);
-            if (!Engine.Tool.Begin(Name ?? string.Empty, GetFlags())) return;
-            MenuBar?.Update();
-            for (int i = 0; i < container.Count; i++) container[i].DoUpdate();
+            Engine.Tool.SetNextWindowCollapsed(IsCollapsed, ToolCond.Once);
+            Engine.Tool.SetNextWindowPos(Position, ToolCond.Once);
+            Engine.Tool.SetNextWindowSize(_size, ToolCond.Once);
+            if (Engine.Tool.Begin(Name ?? string.Empty, GetFlags()))
+            {
+                MenuBar?.Update();
+                for (int i = 0; i < container.Count; i++) container[i].DoUpdate();
+            }
+            IsCollapsed = Engine.Tool.IsWindowCollapsed();
+            Size = Engine.Tool.GetWindowSize();
+            Position = Engine.Tool.GetWindowPos();
             Engine.Tool.End();
         }
     }
