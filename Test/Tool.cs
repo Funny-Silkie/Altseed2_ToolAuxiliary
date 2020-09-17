@@ -12,7 +12,7 @@ namespace Test
         {
             Engine.Initialize("Empry", 960, 720, new Configuration()
             {
-                ToolEnabled = true
+                EnabledCoreModules = CoreModules.Default | CoreModules.Tool
             });
             ToolHelper.Name = "Tool1";
             ToolHelper.Size = new Vector2F(260, 720);
@@ -28,7 +28,7 @@ namespace Test
         {
             Engine.Initialize("Tool1", 960, 720, new Configuration()
             {
-                ToolEnabled = true
+                EnabledCoreModules = CoreModules.Default | CoreModules.Tool
             });
             ToolHelper.Name = "Tool1";
             ToolHelper.Size = new Vector2F(250, 250);
@@ -83,7 +83,7 @@ namespace Test
         {
             Engine.Initialize("Tool2", 960, 720, new Configuration()
             {
-                ToolEnabled = true
+                EnabledCoreModules = CoreModules.Default | CoreModules.Tool
             });
             ToolHelper.Name = "Tool2";
             ToolHelper.Size = new Vector2F(250, 500);
@@ -126,7 +126,7 @@ namespace Test
         {
             Engine.Initialize("Tool3", 960, 720, new Configuration()
             {
-                ToolEnabled = true
+                EnabledCoreModules = CoreModules.Default | CoreModules.Tool
             });
             ToolHelper.Name = "Tool3";
             ToolHelper.Size = new Vector2F(250, 150);
@@ -162,7 +162,7 @@ namespace Test
         {
             Engine.Initialize("Tool4", 960, 720, new Configuration()
             {
-                ToolEnabled = true
+                EnabledCoreModules = CoreModules.Default | CoreModules.Tool
             });
             ToolHelper.Name = "Tool4";
             ToolHelper.Size = new Vector2F(250, 350);
@@ -205,7 +205,7 @@ namespace Test
         {
             Engine.Initialize("Tool5", 960, 720, new Configuration()
             {
-                ToolEnabled = true
+                EnabledCoreModules = CoreModules.Default | CoreModules.Tool
             });
             ToolHelper.Name = "Tool5";
             ToolHelper.Size = new Vector2F(250, 350);
@@ -243,7 +243,7 @@ namespace Test
         {
             Engine.Initialize("Tool6", 960, 720, new Configuration()
             {
-                ToolEnabled = true
+                EnabledCoreModules = CoreModules.Default | CoreModules.Tool
             });
             ToolHelper.Name = "Tool6";
             ToolHelper.Size = new Vector2F(250, 350);
@@ -300,7 +300,7 @@ namespace Test
         {
             Engine.Initialize("Tool7", 960, 720, new Configuration()
             {
-                ToolEnabled = true
+                EnabledCoreModules = CoreModules.Default | CoreModules.Tool
             });
             ToolHelper.Name = "Tool7";
             ToolHelper.Size = new Vector2F(250, 350);
